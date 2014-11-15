@@ -1,8 +1,8 @@
-parsed = JSON.parse(File.read("the_iconic_data_feed.json"))
+parsed = JSON.parse(File.read("db/the_iconic_data_feed.json"))
 
 parsed.each do |item|
 
-	
+
 	new_item = Item.new
 	new_item.merchant_id = item["MerchantId"]
 	new_item.sku = item["SKU"]
@@ -14,7 +14,8 @@ parsed.each do |item|
 	new_item.color = item["Colour"]
 	new_item.gender = item["Gender"]
 	new_item.keywords = item["Keywords"]
-	# new_item.image_url50 = item[]
-
+	new_item.image_url50 = item["Image50"]
+	new_item.image_url400 = item["Image400"]
+	new_item.save
 
 end
