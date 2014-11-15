@@ -28,7 +28,7 @@ parsed.each do |item|
 	    existing = Category.where(:child => category)
 	    parent_id = existing.first.id
 	  else
-	    new_category = Category.create(:child => category, :parent => parent_id)
+	    new_category = Category.create(:child => category, :parent_id => parent_id)
 	    parent_id = new_category.id
 	  end
 	end
