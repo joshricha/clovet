@@ -23,14 +23,36 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
-# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring',        group: :development
+# For Heroku bootstrap
+gem 'rails_12factor'
+
+group :development do
+  gem 'spring' # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+
+  gem 'pry-rails'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
+
+  gem 'annotate' # show th table columns in your model file
+end
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
+
+# creates PDFs
+gem 'pdfkit'
+gem 'wkhtmltopdf-binary'
+
+# for google plus logins
+gem 'devise'
+gem 'omniauth-google-oauth2'
 
 # Use unicorn as the app server
 # gem 'unicorn'
+
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'autoprefixer-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
