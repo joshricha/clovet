@@ -36,3 +36,4 @@ parsed.each do |item|
 
   new_item.category_id = parent_id
   new_item.save
+end
