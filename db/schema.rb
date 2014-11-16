@@ -1,3 +1,4 @@
+# comment
 # encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
@@ -17,11 +18,10 @@ ActiveRecord::Schema.define(version: 20141115132918) do
   enable_extension "plpgsql"
 
   create_table "categories", force: true do |t|
-    t.integer  "parent_id"
+    t.integer  "parent"
     t.string   "child"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
   end
 
   create_table "items", force: true do |t|
