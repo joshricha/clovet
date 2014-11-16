@@ -1,4 +1,3 @@
-# comment
 class AddLoginsForUsers < ActiveRecord::Migration
   def change
     add_column :users, :email, :string
