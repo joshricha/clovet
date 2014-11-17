@@ -3,9 +3,7 @@
 <img src="<%= @item.image_url400 %>" alt="">
 <%= @item.name %>
 
-<%  if @like %>
+
 <%=    link_to "Like", @like %>
-<%  end %>
-<%  if @dislike %>
+
 <%=    link_to "Dislike", @dislike %>
-<%  end %>
