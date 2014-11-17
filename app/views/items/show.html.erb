@@ -3,39 +3,32 @@
 <img src="<%= @item.image_url400 %>" alt="">
 <%= @item.name %>
 
+<%= form_tag('/create_history', :method => 'post') do %>
+<%= hidden_field_tag 'item_id', @item.id %>
+<%= hidden_field_tag 'liked', 'true'  %>
+<%= hidden_field_tag 'clicked_through', 'false'  %>
+<%= hidden_field_tag 'next_item', @next_item.id  %>
+<%= submit_tag 'liked' %>
+<% end %>
 
-<div id="like" data-item-id="<%= @item.id%>" data-like="true" data-clicked-through="false">
-	<%=    link_to "Like", @like %>
-</div>
+<%= form_tag('/create_history', :method => 'post') do %>
+<%= hidden_field_tag 'item_id', @item.id %>
+<%= hidden_field_tag 'liked', 'false'  %>
+<%= hidden_field_tag 'clicked_through', 'false'  %>
+<%= hidden_field_tag 'next_item', @next_item.id  %>
+<%= submit_tag 'disliked' %>
+<% end %>
 
-<div id="dislike" data-item-id="<%= @item.id%>" data-like="false" data-clicked-through="false">
-	<%=    link_to "Dislike", @dislike %>
-</div>
-
-<div id="buy" data-item-id="<%= @item.id%>" data-like="true" data-clicked-through="true"> 
-	<%= link_to "Buy", @item.merchant_url, :target => '_blank'  %>
-</div>
-
-
-<script>
-
-	var add_to_history = function() {
-	$.ajax({
-	    type: 'POST',
-	    url: '/add_to_history',
-	    data: { itemId: $(this).attr('data-item-id'),  
-	    				likeOrNot: $(this).attr('data-like'), 
-	    				clickedThrough: $(this).attr('data-clicked-through') }
-	  });
-	// console.log(this);
-	 console.log(<%= @item.id %>)
-	 console.log(<%= @user.id  %>)
-
-	}
+<%= form_tag('/create_history', :method => 'post') do %>
+<%= hidden_field_tag 'item_id', @item.id %>
+<%= hidden_field_tag 'liked', 'true'  %>
+<%= hidden_field_tag 'clicked_through', 'true'  %>
+<%= hidden_field_tag 'next_item', @next_item.id  %>
+<%= submit_tag 'buy' %>
+<% end %>
 
 
-	$('#like').on('click', add_to_history);
-	$('#dislike').on('click', add_to_history);
-	$('#buy').on('click', add_to_history);
 
-</script>
+
+
+
