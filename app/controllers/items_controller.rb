@@ -25,8 +25,9 @@ class ItemsController < ApplicationController
     new_history = History.new 
     new_history.user_id = @user.id 
     new_history.item_id = params['itemId']
-    new_history.liked = true 
-    new_history.in_wishlist = true 
+    new_history.liked = params['likeOrNot']
+    new_history.in_wishlist = params['inWishlist']
+    new_history.clicked_through = params['clickedThrough']
     new_history.save
     
     render :json => new_history
