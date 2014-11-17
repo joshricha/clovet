@@ -2,7 +2,7 @@ parsed = JSON.parse(File.read("db/the_iconic_data_feed.json"))
 
 Item.destroy_all
 Category.destroy_all
-# please delete when we have a working app 
+# please delete when we have a working app
 User.destroy_all
 
 
@@ -23,6 +23,7 @@ parsed.each do |item|
   new_item.keywords = item["Keywords"]
   new_item.image_url50 = item["Image50"]
   new_item.image_url400 = item["Image400"]
+  new_item.active = true
 
   new_item.category_id = item["category_id"]
 
