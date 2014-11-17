@@ -22,15 +22,31 @@ class ItemsController < ApplicationController
 
   def add_to_history
     @user = current_user
-    new_history = History.new 
-    new_history.user_id = @user.id 
+    new_history = History.new
+    new_history.user_id = @user.id
     new_history.item_id = params['itemId']
     new_history.liked = params['likeOrNot']
     new_history.in_wishlist = params['likeOrNot']
     new_history.clicked_through = params['clickedThrough']
     new_history.save
-    
+
     render :json => new_history
+  end
+
+  def category
+    @user = current_user
+
+    @category = params[:category]
+
+    if @category == 'womens'
+      @items = Item.all.where(:gender => "female")
+      @item = @items.sample
+    elsif @category == 'mens'
+      @items = Item.all.where(:gender => "male")
+      @item = @items.sample
+    end
+
+    render '/items/category/show.html.erb'
   end
 
 end

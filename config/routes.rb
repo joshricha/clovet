@@ -2,10 +2,6 @@ Rails.application.routes.draw do
 
   root 'items#index'
 
-  resources :items
-
-  resources :users
-
   get '/login' => 'session#new'
   post '/login' => 'session#create'
   delete '/login' => 'session#destroy', :as => 'logout'
@@ -15,6 +11,8 @@ Rails.application.routes.draw do
 
   post '/add_to_history' => 'items#add_to_history'
 
-  
+  get '/items/category/:category' => 'items#category'
 
+  resources :users
+  resources :items
 end
