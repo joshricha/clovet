@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
 
     offset = rand(Item.count)
     @rand_record = Item.offset(offset).first.id
-    
+
     if !params[:search].present?
       @items = Item.all
     else
@@ -30,8 +30,8 @@ class ItemsController < ApplicationController
 
     @user = current_user
 
-    new_history = History.new 
-    new_history.user_id = @user.id 
+    new_history = History.new
+    new_history.user_id = @user.id
     new_history.item_id = params['item_id']
     new_history.liked = if params['liked'] == 'true'
                           true
@@ -45,9 +45,9 @@ class ItemsController < ApplicationController
                         end
     new_history.clicked_through = params['clicked_through']
     new_history.save
-    
+
     redirect_to item_path(params['next_item'])
-    
+
 
   end
 
