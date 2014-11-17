@@ -38,12 +38,16 @@ class ItemsController < ApplicationController
 
     @category = params[:category]
 
-    if @category == 'womens'
-      @items = Item.all.where(:gender => "female")
-      @item = @items.sample
-    elsif @category == 'mens'
-      @items = Item.all.where(:gender => "male")
-      @item = @items.sample
+    case @category
+      when 'womens'
+        @category == 'womens'
+        @items = Item.all.where(:gender => "female")
+        @items += Item.all.where(:gender => "unisex")
+        @item = @items.sample
+      when 'mens'
+        @items = Item.all.where(:gender => "male")
+        @items += Item.all.where(:gender => "unisex")
+        @item = @items.sample
     end
 
     render '/items/category/show.html.erb'
