@@ -5,6 +5,12 @@ class ItemsController < ApplicationController
 
     offset = rand(Item.count)
     @rand_record = Item.offset(offset).first.id
+
+    if !params[:search].present?
+      @items = Item.all
+    else
+      @items = Item.where("content ilike ?", "%#{params[:search]}%")
+    end
   end
 
   def show
@@ -16,21 +22,33 @@ class ItemsController < ApplicationController
     last = Item.last.id
     rand_number = (first..last).to_a.sample
 
-    @like = Item.where(id: rand_number).first
-    @dislike = Item.where(id: rand_number).first
+    @next_item = Item.where(id: rand_number).first
+
   end
 
-  def add_to_history
+  def create_history
+
     @user = current_user
+
     new_history = History.new
     new_history.user_id = @user.id
-    new_history.item_id = params['itemId']
-    new_history.liked = params['likeOrNot']
-    new_history.in_wishlist = params['likeOrNot']
-    new_history.clicked_through = params['clickedThrough']
+    new_history.item_id = params['item_id']
+    new_history.liked = if params['liked'] == 'true'
+                          true
+                        else
+                          false
+                        end
+    new_history.in_wishlist = if params['liked'] == 'true'
+                          true
+                        else
+                          false
+                        end
+    new_history.clicked_through = params['clicked_through']
     new_history.save
 
-    render :json => new_history
+    redirect_to item_path(params['next_item'])
+
+
   end
 
   def category

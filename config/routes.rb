@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get '/sign_up' => 'users#new'
   post '/sign_up' => 'users#create'
 
-  post '/add_to_history' => 'items#add_to_history'
+  post '/create_history' => 'items#create_history'
 
   get '/items/category/:category' => 'items#category'
 
