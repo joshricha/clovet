@@ -4,6 +4,26 @@
 <%= @item.name %>
 
 
-<%=    link_to "Like", @like %>
+<div id="like" data-item-id="<%= @item.id%>"><%=    link_to "Like", @like %></div>
 
-<%=    link_to "Dislike", @dislike %>
+<div id="dislike"><%=    link_to "Dislike", @dislike %></div>
+
+
+<script>
+
+	var add_to_history = function() {
+	$.ajax({
+	    type: 'POST',
+	    url: '/add_to_history',
+	    data: { itemId: $('#like').attr('data-item-id') }
+	  });
+
+	 console.log(<%= @item.id %>)
+	 console.log(<%= @user.id  %>)
+
+	}
+
+
+	$('#like').on('click', add_to_history);
+
+</script>

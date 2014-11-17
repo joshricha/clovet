@@ -23,8 +23,8 @@ parsed.each do |item|
   new_item.keywords = item["Keywords"]
   new_item.image_url50 = item["Image50"]
   new_item.image_url400 = item["Image400"]
+  new_item.active = true
 
-  new_item.category_id = item["category_id"]
 
   category_s = item["Category"]
   categories_array = category_s.split(' > ')
