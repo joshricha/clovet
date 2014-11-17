@@ -18,11 +18,15 @@
     <% if logged_in? %>
       <div><%= link_to 'logout', login_path, :method => :delete, :data => { :confirm => 'are you sure?' } %></div>
     <% else %>
-      <div><%= link_to 'login', login_path %></div>
+
+      <li><%= link_to 'login', login_path %></li>
+      <li><%= link_to 'sign up', sign_up_path %></li>
+
     <% end %>
   
 
 <%= yield %>
+
 
 </body>
 </html>
