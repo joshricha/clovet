@@ -23,7 +23,13 @@
       <li><%= link_to 'sign up', sign_up_path %></li>
 
     <% end %>
-  
+    
+    <%= form_tag items_path, :method => 'get' do %>
+    <p>
+      <%= text_field_tag :search, params[:search], placeholder: "enter a keyword" %>
+      <%= submit_tag "Search", :name => nil %>
+    </p>
+    <% end %>
 
 <%= yield %>
 

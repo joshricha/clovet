@@ -14,7 +14,7 @@
 <%= @item.name %>
 
 
-<%= form_tag('/create_history', :method => 'post') do %>
+<%= form_tag create_history_path, :method => 'post', :id => "liked" do %>
 <%= hidden_field_tag 'item_id', @item.id %>
 <%= hidden_field_tag 'liked', 'true'  %>
 <%= hidden_field_tag 'clicked_through', 'false'  %>
@@ -23,7 +23,7 @@
 <% end %>
 
 
-<%= form_tag('/create_history', :method => 'post') do %>
+<%= form_tag create_history_path, :method => 'post', :id => "disliked" do %>
 <%= hidden_field_tag 'item_id', @item.id %>
 <%= hidden_field_tag 'liked', 'false'  %>
 <%= hidden_field_tag 'clicked_through', 'false'  %>
@@ -43,39 +43,12 @@
 
 
 
-<script>
-
-$(document).ready(function(){
-  var $imgSource = $('#img-source');
-  var $likeBtn = $('#like-btn');
-  var $dislikeBtn = $('#dislike-btn');
-  
-  // when imgSource starts moving check 
-  // $imgSource.on('click', 'li', function(){
-  //   window.location = '/items/' + (Math.floor((Math.random() * 100) + 1))
-
-  // ****** if the imgSource is swiped left submit form A
-  
-  // ****** if the imgSource is swiped right submit form B  
-
-//   $( "#target" ).submit(function( event ) {
-//   alert( "Handler for .submit() called." );
-//   event.preventDefault();
-// });
-
-  // });
-
-})  
-
-</script>
-  
 
 
 <script>
   
 var swingIt = function(){
 
-  // querySelector means $('.stack li')
     var stack = gajus.Swing.Stack(),
         cardElement = document.querySelector('.stack li'),
         throwOutConfidenceBind = document.querySelector('#throw-out-confidence-bind'),
@@ -91,9 +64,6 @@ var swingIt = function(){
 
     stack.on('dragmove', function (e) {
         throwOutConfidenceElements[e.throwDirection == gajus.Swing.Card.DIRECTION_RIGHT ? 'yes' : 'no'].opacity = e.throwOutConfidence;
-
-        // throwOutConfidenceBind.innerHTML = e.throwOutConfidence.toFixed(3);
-        // directionBind.innerHTML = e.throwDirection == gajus.Swing.Card.DIRECTION_RIGHT ? 'right' : 'left';
     });
 
     stack.on('dragend', function (e) {
@@ -104,18 +74,15 @@ var swingIt = function(){
     });
 
 
-    // stack.on('throwoutleft', function() {
-    //   console.log('sdfsdfsdlkfjslkdf');
+    stack.on('throwoutleft', function() {
+      $("#disliked").submit()
+    });
 
-    //   $( "#target" ).submit(function( event ) {
-    //     alert( "Handler for .submit() called." );
-    //     event.preventDefault();
-    //   });  // update this to submit form!!!!!!!
-
-    // })
-
+    stack.on('throwoutright', function(){
+      $('#liked').submit()
+    })
     
-  };
+}; // ends swingIt
 
 
     swingIt();
