@@ -26,7 +26,7 @@ class ItemsController < ApplicationController
     new_history.user_id = @user.id 
     new_history.item_id = params['itemId']
     new_history.liked = params['likeOrNot']
-    new_history.in_wishlist = params['inWishlist']
+    new_history.in_wishlist = params['likeOrNot']
     new_history.clicked_through = params['clickedThrough']
     new_history.save
     
