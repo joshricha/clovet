@@ -72,13 +72,19 @@ $(document).ready(function(){
   var $dislikeBtn = $('#dislike-btn');
   
   // when imgSource starts moving check 
-  $imgSource.on('click', 'li', function(){
-    window.location = '/items/' + (Math.floor((Math.random() * 100) + 1))
+  // $imgSource.on('click', 'li', function(){
+  //   window.location = '/items/' + (Math.floor((Math.random() * 100) + 1))
 
   // ****** if the imgSource is swiped left submit form A
   
   // ****** if the imgSource is swiped right submit form B  
-  });
+
+//   $( "#target" ).submit(function( event ) {
+//   alert( "Handler for .submit() called." );
+//   event.preventDefault();
+// });
+
+  // });
 
 })  
 
@@ -117,6 +123,19 @@ var swingIt = function(){
             throwOutConfidenceElements.no.opacity = 0;
         }
     });
+
+
+    // stack.on('throwoutleft', function() {
+    //   console.log('sdfsdfsdlkfjslkdf');
+
+    //   $( "#target" ).submit(function( event ) {
+    //     alert( "Handler for .submit() called." );
+    //     event.preventDefault();
+    //   });  // update this to submit form!!!!!!!
+
+    // })
+
+    
   };
 
 
