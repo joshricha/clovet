@@ -25,6 +25,7 @@ parsed.each do |item|
   new_item.image_url400 = item["Image400"]
   new_item.active = true
 
+
   category_s = item["Category"]
   categories_array = category_s.split(' > ')
   parent_id = nil

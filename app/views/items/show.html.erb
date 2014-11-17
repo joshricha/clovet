@@ -4,6 +4,38 @@
 <%= @item.name %>
 
 
-<%=    link_to "Like", @like %>
+<div id="like" data-item-id="<%= @item.id%>" data-like="true" data-clicked-through="false">
+	<%=    link_to "Like", @like %>
+</div>
 
-<%=    link_to "Dislike", @dislike %>
+<div id="dislike" data-item-id="<%= @item.id%>" data-like="false" data-clicked-through="false">
+	<%=    link_to "Dislike", @dislike %>
+</div>
+
+<div id="buy" data-item-id="<%= @item.id%>" data-like="true" data-clicked-through="true"> 
+	<%= link_to "Buy", @item.merchant_url, :target => '_blank'  %>
+</div>
+
+
+<script>
+
+	var add_to_history = function() {
+	$.ajax({
+	    type: 'POST',
+	    url: '/add_to_history',
+	    data: { itemId: $(this).attr('data-item-id'),  
+	    				likeOrNot: $(this).attr('data-like'), 
+	    				clickedThrough: $(this).attr('data-clicked-through') }
+	  });
+	// console.log(this);
+	 console.log(<%= @item.id %>)
+	 console.log(<%= @user.id  %>)
+
+	}
+
+
+	$('#like').on('click', add_to_history);
+	$('#dislike').on('click', add_to_history);
+	$('#buy').on('click', add_to_history);
+
+</script>
