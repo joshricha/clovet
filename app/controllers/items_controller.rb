@@ -23,6 +23,7 @@ class ItemsController < ApplicationController
   def create_history
 
     @user = current_user
+
     new_history = History.new 
     new_history.user_id = @user.id 
     new_history.item_id = params['item_id']
@@ -41,6 +42,27 @@ class ItemsController < ApplicationController
     
     redirect_to item_path(params['next_item'])
     
+
+  end
+
+  def category
+    @user = current_user
+
+    @category = params[:category]
+
+    case @category
+      when 'womens'
+        @category == 'womens'
+        @items = Item.all.where(:gender => "female")
+        @items += Item.all.where(:gender => "unisex")
+        @item = @items.sample
+      when 'mens'
+        @items = Item.all.where(:gender => "male")
+        @items += Item.all.where(:gender => "unisex")
+        @item = @items.sample
+    end
+
+    render '/items/category/show.html.erb'
   end
 
 end

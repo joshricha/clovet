@@ -2,20 +2,28 @@
 <html>
 <head>
   <title>Project2</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
+
+<style type="text/css">
+.test{
+  background-color: orange;
+}
+</style>
+
 <body>
-  <ul>
+
     <% if logged_in? %>
-      <li><%= link_to 'logout', login_path, :method => :delete, :data => { :confirm => 'are you sure?' } %></li>
+      <div><%= link_to 'logout', login_path, :method => :delete, :data => { :confirm => 'are you sure?' } %></div>
     <% else %>
+
       <li><%= link_to 'login', login_path %></li>
       <li><%= link_to 'sign up', sign_up_path %></li>
-    <% end %>
-  </ul>
 
+    <% end %>
+  
 
 <%= yield %>
 
