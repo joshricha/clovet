@@ -5,12 +5,6 @@ class ItemsController < ApplicationController
 
     offset = rand(Item.count)
     @rand_record = Item.offset(offset).first.id
-    
-    if !params[:search].present?
-      @items = Item.all
-    else
-      @items = Item.where("content ilike ?", "%#{params[:search]}%")
-    end
   end
 
   def show
