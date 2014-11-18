@@ -33,8 +33,6 @@ parsed.each do |item|
   categories_array = categories_array.unshift(gender)
   parent_id = nil
   gender_id = nil
-  puts categories_array
-
   categories_array.each do |category|
     if category == 'male' || category == 'female' || category == 'unisex'
       if Category.where(:name => category).length > 0
