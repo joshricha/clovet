@@ -5,5 +5,6 @@ class User < ActiveRecord::Base
   validates :password_confirmation, :presence => true
 
   has_many :histories
+  # has_many :items, through: :history
 
 end
