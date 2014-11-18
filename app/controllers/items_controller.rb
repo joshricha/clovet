@@ -20,7 +20,7 @@ class ItemsController < ApplicationController
 # Determines what will be shown next
 
     # if a first-time user (no history yet)
-    if @user.histories.count < 20  
+    if @user.histories.count < 20
 
       @next_item = Item.where(:id => rand(1000)).first
 
@@ -31,7 +31,7 @@ class ItemsController < ApplicationController
 
       brands_liked = liked_items.each_with_object(Hash.new(0)) { |item,counts| counts[item.item.brand] += 1 }
       categories_liked = liked_items.each_with_object(Hash.new(0)) { |item,counts| counts[item.item.category.child] += 1 }
-    
+
       def get_favourite(list)
         counts = []
         # gets all the item counts and adds to 'counts' array
@@ -41,7 +41,7 @@ class ItemsController < ApplicationController
         #finds out the two highest counts from the 'counts' array
         highest_counts = counts.sort.uniq
 
-        if highest_counts.length > 1 
+        if highest_counts.length > 1
           highest_counts = highest_counts[-2..-1]
         else
           highest_counts
@@ -92,14 +92,11 @@ class ItemsController < ApplicationController
 
   end
 
-  def cat_womens
+  def category_menu
+    @parent = params[:category]
+    @children = Category.find(6).children
 
-    render '/items/category/womens/index.html.erb'
-  end
-
-  def cat_mens
-
-    render '/items/category/mens/index.html.erb'
+    render "/items/category/#{@parent}/index.html.erb"
   end
 
   def category_all
@@ -107,17 +104,15 @@ class ItemsController < ApplicationController
 
     @category = params[:category]
 
-    case @category
-      when 'womens'
-        @category == 'womens'
-        @items = Item.all.where(:gender => "female")
-        @items += Item.all.where(:gender => "unisex")
-        @item = @items.sample
-      when 'mens'
-        @items = Item.all.where(:gender => "male")
-        @items += Item.all.where(:gender => "unisex")
-        @item = @items.sample
+    if @category == "womens"
+      @category = "female"
+    elsif @category == "mens"
+      @category = "male"
     end
+
+    @items = Item.all.where(:gender => @category)
+    # @items += Item.all.where(:gender => "unisex")
+    @item = @items.sample
 
     render '/items/category/show.html.erb'
   end

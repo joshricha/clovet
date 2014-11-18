@@ -2,6 +2,14 @@
 
 <h1>Womens</h1>
 
-<a href="/items/category/<%= 'womens' %>">View All Womens</a>
+<a href="/items/category/<%= 'womens' %>/all">View All Womens</a>
 
-<a href="/items/category/<%= 'shoes' %>">View Shoes</a>
+<ul>
+  <% @children.each do |cat| %>
+    <li>
+      <a href="/items/category/womens/<%= cat.name %>">
+        <%= cat.name %>
+      </a>
+    </li>
+  <% end %>
+</ul>
