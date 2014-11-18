@@ -7,6 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 
+
 <body>
 
     <% if logged_in? %>
@@ -17,6 +18,8 @@
       <li><%= link_to 'sign up', sign_up_path %></li>
 
     <% end %>
+    
+    
 
 <%= yield %>
 
