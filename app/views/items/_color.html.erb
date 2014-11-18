@@ -1,4 +1,9 @@
 <!-- captures and send color value to show as filter -->
+<%= form_tag item_path, :method => 'get', :id => "all_colors" do %>
+<%= hidden_field_tag 'color', 'all_colors' %>
+<button>all</button>
+<% end %>
+
 <%= form_tag item_path, :method => 'get', :id => "black" do %>
 <%= hidden_field_tag 'color', 'black' %>
 <button>black</button>

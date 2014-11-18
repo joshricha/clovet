@@ -11,7 +11,10 @@
     </ul>
   </div>  
 
-<%= @item.name %>
+<div id="item-details">
+  <p><%= @item.name %></p>
+  <p>$<%= @item.price %> AUD</p>
+</div>
 
 <%= render 'items/history' %>
 <%= render 'items/color' %>
@@ -22,6 +25,9 @@
 
 
 
+
+
+<p><%= @liked_items  %></p>
 
 
 <!--================= move below to javascript file ===========================-->
