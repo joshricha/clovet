@@ -9,7 +9,6 @@ class ItemsController < ApplicationController
 
   def show
     @user = current_user
-
     @item = Item.find(params[:id])
 
     first = Item.first.id
@@ -64,5 +63,6 @@ class ItemsController < ApplicationController
 
     render '/items/category/show.html.erb'
   end
+
 
 end
