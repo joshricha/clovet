@@ -90,10 +90,19 @@ class ItemsController < ApplicationController
 
     redirect_to item_path(params['next_item'])
 
-
   end
 
-  def category
+  def cat_womens
+
+    render '/items/category/womens/index.html.erb'
+  end
+
+  def cat_mens
+
+    render '/items/category/mens/index.html.erb'
+  end
+
+  def category_all
     @user = current_user
 
     @category = params[:category]

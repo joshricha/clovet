@@ -11,8 +11,11 @@ Rails.application.routes.draw do
 
   post '/create_history' => 'items#create_history'
 
-  get '/items/category/:category' => 'items#category'
+  get '/items/category/mens/all' => 'items#cat_mens'
+  get '/items/category/womens/all' => 'items#cat_womens'
+  get '/items/category/:category' => 'items#category_all'
 
   resources :users
   resources :items
+  resources :categories
 end

@@ -1,4 +1,5 @@
 class Item < ActiveRecord::Base
-	belongs_to :category
-	# belongs_to :users , through: :history
+
+  belongs_to :category
+
 end
