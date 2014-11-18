@@ -14,3 +14,22 @@
  *= require_self
  */
 
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+#liked_submit {
+	display: none;
+}
+
+#disliked_submit {
+	display: none;
+}
+
+#buy_submit {
+	margin: 0 auto;
+	display: block;
+}
+
+#item-details {
+	text-align: center;
+}

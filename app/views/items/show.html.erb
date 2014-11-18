@@ -11,7 +11,10 @@
     </ul>
   </div>  
 
-<%= @item.name %>
+<div id="item-details">
+  <p><%= @item.name %></p>
+  <p>$<%= @item.price %> AUD</p>
+</div>
 
 
 <%= form_tag create_history_path, :method => 'post', :id => "liked" do %>
@@ -19,7 +22,7 @@
 <%= hidden_field_tag 'liked', 'true'  %>
 <%= hidden_field_tag 'clicked_through', 'false'  %>
 <%= hidden_field_tag 'next_item', @next_item.id  %>
-<%= submit_tag 'liked' %>
+<%= submit_tag 'liked', :id=> 'liked_submit'%>
 <% end %>
 
 
@@ -28,7 +31,7 @@
 <%= hidden_field_tag 'liked', 'false'  %>
 <%= hidden_field_tag 'clicked_through', 'false'  %>
 <%= hidden_field_tag 'next_item', @next_item.id  %>
-<%= submit_tag 'disliked' %>
+<%= submit_tag 'disliked', :id=> 'disliked_submit' %>
 <% end %>
 
 <%= form_tag('/create_history', :method => 'post') do %>
@@ -36,11 +39,11 @@
 <%= hidden_field_tag 'liked', 'true'  %>
 <%= hidden_field_tag 'clicked_through', 'true'  %>
 <%= hidden_field_tag 'next_item', @next_item.id  %>
-<%= submit_tag 'buy' %>
+<%= submit_tag 'buy', :id=> 'buy_submit' %>
 <% end %>
 
 
-
+<p><%= @liked_items  %></p>
 
 <!--================= move below to javascript file ===========================-->
 <script>
