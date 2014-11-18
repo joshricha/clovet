@@ -4,6 +4,8 @@
   <title>Project2</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
+  <script src="http://malsup.github.com/jquery.form.js"></script>
+  <meta name="viewport" content="width=device-width", "initial-scale=1">
   <%= csrf_meta_tags %>
 </head>
 
@@ -20,9 +22,10 @@
       <li><%= link_to 'login', login_path %></li>
       <li><%= link_to 'sign up', sign_up_path %></li>
 
+
     <% end %>
-    
-    
+
+
 
 <%= yield %>
 

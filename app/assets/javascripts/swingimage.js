@@ -1,47 +1,6 @@
-<%= link_to "Home", root_path %>
+$(document).ready(function(){
 
-  <div id="viewport">
-    <ul class="stack" id="img-source">
-      <li class="spades">
-         <img src="<%= @item.image_url400 %>" alt="">
-          
-          <div class="yes"></div>
-          <div class="no"></div>
-      </li>
-    </ul>
-  </div> 
-
-<div id="item-details">
-  <p><%= @item.name %></p>
-  <p>$<%= @item.price %> AUD</p>
-</div>
-
-
-<%#= render '/items/category/history' %>
-<%#= render '/items/category/color' %>
-
-
-<!-- 
-
-<img src="<%#= @item.image_url400 %>" alt="">
-<%#= @item.name %>
-
-
-<div id="like" data-item-id="<%= @item.id%>" data-like="true" data-clicked-through="false">
-  <%#=    link_to "Like", @like %>
-</div>
-
-<div id="dislike" data-item-id="<%= @item.id%>" data-like="false" data-clicked-through="false">
-  <%#=    link_to "Dislike", @dislike %>
-</div>
-
-<div id="buy" data-item-id="<%= @item.id%>" data-like="true" data-clicked-through="true">
-  <%#= link_to "Buy", @item.merchant_url, :target => '_blank'  %>
-</div>
- -->
-
-<script>
-  var swingIt = function(){
+    var swingIt = function(){
 
         var stack = gajus.Swing.Stack(),
             cardElement = document.querySelector('.stack li'),
@@ -78,5 +37,6 @@
     }; // ends swingIt
 
         swingIt();
-</script>
 
+}); // ends document.ready
+    

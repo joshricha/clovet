@@ -37,13 +37,26 @@ task :update_items  => :environment do
 
       category_s = item["Category"]
       categories_array = category_s.split(' > ')
+      gender = item["Gender"]
+      categories_array = categories_array.unshift(gender)
       parent_id = nil
+      gender_id = nil
       categories_array.each do |category|
-        if Category.where(:child => category).length > 0
-          existing = Category.where(:child => category)
-          parent_id = existing.first.id
+        if category == 'male' || category == 'female' || category == 'unisex'
+          if Category.where(:name => category).length > 0
+            existing = Category.where(:name => category)
+            parent_id = existing.first.id
+            gender_id = existing.first.id
+          else
+            new_category = Category.create(:name => category, :parent_id => parent_id)
+            parent_id = new_category.id
+            gender_id = new_category.id
+          end
+        elsif Category.find(gender_id).descendants.where(:name => category).length > 0
+            existing = Category.where(:name => category)
+            parent_id = existing.first.id
         else
-          new_category = Category.create(:child => category, :parent_id => parent_id)
+          new_category = Category.create(:name => category, :parent_id => parent_id)
           parent_id = new_category.id
         end
       end
