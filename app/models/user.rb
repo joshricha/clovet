@@ -4,4 +4,5 @@ class User < ActiveRecord::Base
   validates :name, :uniqueness => true
   validates :password_confirmation, :presence => true
 
+  has_many :histories
 end
