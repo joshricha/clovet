@@ -29,7 +29,7 @@ class ItemsController < ApplicationController
       liked_items = @user.histories.where(:liked => true)
 
       brands_liked = liked_items.each_with_object(Hash.new(0)) { |item,counts| counts[item.item.brand] += 1 }
-      categories_liked = liked_items.each_with_object(Hash.new(0)) { |item,counts| counts[item.item.category.child] += 1 }
+      categories_liked = liked_items.each_with_object(Hash.new(0)) { |item,counts| counts[item.item.category.name] += 1 }
     
       def get_favourite(list)
         counts = []
