@@ -25,7 +25,6 @@ parsed.each do |item|
   new_item.image_url400 = item["Image400"]
   new_item.active = true
 
-  ["female shoes > heels > wedges"]
 
   category_s = item["Category"]
   categories_array = category_s.split(' > ')
