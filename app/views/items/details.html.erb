@@ -10,3 +10,6 @@
 <%= hidden_field_tag 'clicked_through', 'true'  %>
 <%= submit_tag 'buy' %>
 <% end %>
+
+<p><%= link_to 'delete from wishlist', delete_from_wishlist_path(:item_id => @item.id) %></p>
+<p><%= link_to 'back to wishlist', user_wishlist_path(:item_id => @item.id) %></p>
