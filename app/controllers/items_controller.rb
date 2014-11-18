@@ -58,6 +58,10 @@ class ItemsController < ApplicationController
 
       # takes only items that are not in the user's history
       items_not_in_history = Item.where.not(:id => @user.histories.pluck(:item_id))
+
+
+      # color
+
       # gives two options: 1. a random item, 2. an item from a favourite brand
       items_to_show = [items_not_in_history.sample, items_not_in_history.sample, items_not_in_history.sample, items_not_in_history.where(brand: fave_brands.sample).sample ]
 
@@ -70,10 +74,10 @@ class ItemsController < ApplicationController
 
   def create_history
 
-    @user = current_user
+    user = current_user
 
     new_history = History.new
-    new_history.user_id = @user.id
+    new_history.user_id = user.id
     new_history.item_id = params['item_id']
     new_history.liked = if params['liked'] == 'true'
                           true
@@ -90,6 +94,42 @@ class ItemsController < ApplicationController
 
     redirect_to item_path(params['next_item'])
 
+  end
+
+  def create_history_from_buy
+    user = current_user
+
+    new_history = History.new
+    new_history.user_id = user.id
+    new_history.item_id = params['item_id']
+    new_history.liked = if params['liked'] == 'true'
+                          true
+                        else
+                          false
+                        end
+    new_history.in_wishlist = if params['liked'] == 'true'
+                          true
+                        else
+                          false
+                        end
+    new_history.clicked_through = params['clicked_through']
+    new_history.save
+   
+    redirect_to new_history.item.merchant_url
+    
+  end
+
+  def edit_history
+    user = current_user
+    current_history_item = user.histories.where(:item_id => params['item_id']).first
+    current_history_item.clicked_through = params['clicked_through']
+    current_history_item.save
+
+    redirect_to current_history_item.item.merchant_url
+  end
+
+  def details
+    @item = Item.where(:id => params['id']).first
   end
 
   def cat_womens

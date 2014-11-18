@@ -34,7 +34,7 @@
 <%= submit_tag 'disliked', :id=> 'disliked_submit' %>
 <% end %>
 
-<%= form_tag('/create_history', :method => 'post') do %>
+<%= form_tag create_history_from_buy_path, :method => 'post', :target => '_blank' do %>
 <%= hidden_field_tag 'item_id', @item.id %>
 <%= hidden_field_tag 'liked', 'true'  %>
 <%= hidden_field_tag 'clicked_through', 'true'  %>

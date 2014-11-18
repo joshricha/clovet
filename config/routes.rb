@@ -10,11 +10,15 @@ Rails.application.routes.draw do
   post '/sign_up' => 'users#create'
 
   post '/create_history' => 'items#create_history'
+  post '/edit_history' => 'items#edit_history'
+  post '/create_history_from_buy' => 'items#create_history_from_buy'
 
   get '/items/category/mens/all' => 'items#cat_mens'
   get '/items/category/womens/all' => 'items#cat_womens'
   get '/items/category/:category' => 'items#category_all'
 
+  get '/user/wishlist' => 'users#wishlist'
+  get '/items/details/:id' => 'items#details', :as => 'item_details'
   resources :users
   resources :items
   resources :categories

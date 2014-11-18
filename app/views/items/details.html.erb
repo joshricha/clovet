@@ -1,0 +1,12 @@
+<h1>Item details</h1>
+<img src=<%=@item.image_url400  %> >
+<p><%= @item.name  %></p>
+<p>$<%= @item.price  %> AUD</p>
+
+
+<%= form_tag('/edit_history', :method => 'post', :target => "_blank") do %>
+<%= hidden_field_tag 'item_id', @item.id %>
+<%= hidden_field_tag 'liked', 'true'  %>
+<%= hidden_field_tag 'clicked_through', 'true'  %>
+<%= submit_tag 'buy' %>
+<% end %>
