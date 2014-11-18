@@ -7,11 +7,6 @@
   <%= csrf_meta_tags %>
 </head>
 
-<style type="text/css">
-.test{
-  background-color: orange;
-}
-</style>
 
 <body>
 
@@ -24,12 +19,7 @@
 
     <% end %>
     
-    <%= form_tag items_path, :method => 'get' do %>
-    <p>
-      <%= text_field_tag :search, params[:search], placeholder: "enter a keyword" %>
-      <%= submit_tag "Search", :name => nil %>
-    </p>
-    <% end %>
+    
 
 <%= yield %>
 
