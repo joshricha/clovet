@@ -16,34 +16,19 @@
   <p>$<%= @item.price %> AUD</p>
 </div>
 
-
-<%= form_tag create_history_path, :method => 'post', :id => "liked" do %>
-<%= hidden_field_tag 'item_id', @item.id %>
-<%= hidden_field_tag 'liked', 'true'  %>
-<%= hidden_field_tag 'clicked_through', 'false'  %>
-<%= hidden_field_tag 'next_item', @next_item.id  %>
-<%= submit_tag 'liked', :id=> 'liked_submit'%>
-<% end %>
+<%= render 'items/history' %>
+<%= render 'items/color' %>
 
 
-<%= form_tag create_history_path, :method => 'post', :id => "disliked" do %>
-<%= hidden_field_tag 'item_id', @item.id %>
-<%= hidden_field_tag 'liked', 'false'  %>
-<%= hidden_field_tag 'clicked_through', 'false'  %>
-<%= hidden_field_tag 'next_item', @next_item.id  %>
-<%= submit_tag 'disliked', :id=> 'disliked_submit' %>
-<% end %>
 
-<%= form_tag('/create_history', :method => 'post') do %>
-<%= hidden_field_tag 'item_id', @item.id %>
-<%= hidden_field_tag 'liked', 'true'  %>
-<%= hidden_field_tag 'clicked_through', 'true'  %>
-<%= hidden_field_tag 'next_item', @next_item.id  %>
-<%= submit_tag 'buy', :id=> 'buy_submit' %>
-<% end %>
+
+
+
+
 
 
 <p><%= @liked_items  %></p>
+
 
 <!--================= move below to javascript file ===========================-->
 <script>
@@ -60,7 +45,7 @@ var swingIt = function(){
 
     stack.on('dragstart', function (e) {
         throwOutConfidenceElements.yes = e.target.querySelector('.yes').style;
-        throwOutConfidenceElements.no = e.target.querySelector('.no').style;
+        throwOutConfidenceElements.no  = e.target.querySelector('.no').style;
     });
 
     stack.on('dragmove', function (e) {
@@ -72,7 +57,7 @@ var swingIt = function(){
     stack.on('dragend', function (e) {
         if (e.throwOutConfidence != 1) {
             throwOutConfidenceElements.yes.opacity = 0;
-            throwOutConfidenceElements.no.opacity = 0;
+            throwOutConfidenceElements.no.opacity  = 0;
         }
     });
 
