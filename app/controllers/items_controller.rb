@@ -11,11 +11,8 @@ class ItemsController < ApplicationController
     @user = current_user
     @item = Item.find(params[:id])
 
-    first = Item.first.id
-    last = Item.last.id
-    rand_number = (first..last).to_a.sample
-
     @next_item = next_item
+    @item = next_item if params[:color]
 
   end
 
@@ -39,7 +36,7 @@ class ItemsController < ApplicationController
     new_history.clicked_through = params['clicked_through']
     new_history.save
 
-    redirect_to item_path(params['next_item'])
+    redirect_to item_path(params['next_item'], :color => params[:color])
 
   end
 
@@ -215,21 +212,33 @@ class ItemsController < ApplicationController
       # selects what item to show next
 
       # takes only items that are not in the user's history
-      items_not_in_history = Item.where.not(:id => @user.histories.pluck(:item_id))
+      items_not_in_history = Item.where.not(:id => @user.histories.pluck(:item_id), :category_id => 148)
+
+      # if there's a color selected
+      if params['color'] != nil
+        if params['color'] == ""
+          items_not_in_history
+        else
+          items_not_in_history = items_not_in_history.where(:color => params['color'])
+        end
+      end
 
 
-      # color
-
-      # gives two options: 1. a random item, 2. an item from a favourite brand
+      # gives two options: 1. three random items, 2. one item from a favourite brand
       items_to_show = [items_not_in_history.sample, items_not_in_history.sample, items_not_in_history.sample, items_not_in_history.where(brand: fave_brands.sample).sample ]
 
       #chooses randomly from the 'items_to_show' options
+      @sampled = items_to_show.sample
 
-      @next_item = items_to_show.sample
+      #sets the @next item -- chooses another item (from the items_to_show) if @sampled is a nil
+      if @sampled != nil
+        @next_item = @sampled
+      else
+        @next_item = items_to_show.first
+      end
 
     end
 
   end
-
 
 end
