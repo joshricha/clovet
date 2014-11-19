@@ -1,5 +1,15 @@
 <%= link_to "Home", root_path %>
 
-<h1>Mens</h1>
+<h1><%= @name %></h1>
 
 <a href="/items/category/<%= 'mens' %>/all">View All Mens</a>
+
+  <ul>
+    <% @children.each do |cat| %>
+      <li>
+        <a href="/items/category/<%=  %>/<%= cat.name %>">
+          <%= cat.name %>
+        </a>
+      </li>
+    <% end %>
+  </ul>

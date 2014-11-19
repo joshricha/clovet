@@ -91,23 +91,23 @@ class ItemsController < ApplicationController
 
   end
 
-  def category_menu
-    @parent = params[:category]
-    @children = Category.find(6).children
+  def check_top_level_cat
+    @category = params[:category]
+    @name = @category.capitalize
 
-    render "/items/category/#{@parent}/index.html.erb"
+    if @category == "womens"
+      @category = "female"
+      @name = "Womens"
+    elsif @category == "mens"
+      @category = "male"
+      @name = "Mens"
+    end
   end
 
   def category_all
     @user = current_user
 
-    @category = params[:category]
-
-    if @category == "womens"
-      @category = "female"
-    elsif @category == "mens"
-      @category = "male"
-    end
+    check_top_level_cat
 
     @items = Item.all.where(:gender => @category)
     # @items += Item.all.where(:gender => "unisex")
@@ -116,5 +116,47 @@ class ItemsController < ApplicationController
     render '/items/category/show.html.erb'
   end
 
+  def category_menu_1
+    @parent = params[:category]
+
+    check_top_level_cat
+
+    id = Category.where(name: @category).first.id
+
+    @children = Category.find(id).children
+
+    render "/items/category/#{@parent}/index.html.erb"
+  end
+
+  def category_menu_2
+    @gender = params[:gender]
+    @parent = params[:gender]
+    @category = params[:category]
+
+    check_top_level_cat
+
+    id = Category.where(name: @category).first.id
+
+    @children = Category.find(id).children
+
+    render "/items/category/:gender/index.html.erb"
+  end
+
+  def category
+    @gender = params[:gender]
+    @category = params[:category]
+
+    if @gender == "womens"
+      @gender = "female"
+    elsif @gender == "mens"
+      @gender = "male"
+    end
+
+    if @gender == "female"
+      render '/items/category/womens/index.html.erb'
+    elsif @gender == "male"
+      render '/items/category/mens/index.html.erb'
+    end
+  end
 
 end
