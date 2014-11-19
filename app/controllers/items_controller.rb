@@ -118,13 +118,6 @@ class ItemsController < ApplicationController
 
     @children = Category.find_by(name: @gender).descendants.find_by(name: @cat1).children
 
-
-
-    # @children = Category.find_by(name: @gender).children
-    # @children = Category.find_by(name: @gender).descendants.where(name: @cat1).first.descendants
-    # @children = Category.find(id).children
-    # Category.find_by(name: @gender).children
-
     render '/items/category/index.html.erb'
   end
 
@@ -133,15 +126,23 @@ class ItemsController < ApplicationController
     @gender = convert_top_level_name(gender_old)
     @user = current_user
 
-    # finds the items of the category you are looking for. Little SQL magic
-    @items = Category.find_by(name: @gender).descendants.where("lower(name) = ?", params[:category_1]).first.items
 
-    @user.histories
+    @items_cat = Category.find_by(name: @gender).descendants.where("lower(name) = ?", params[:category_1])
+
+    # gets the original category id to include with all descending ids
+    item_id = @items_cat.first.id
+    cat_ids = Category.find(@items_cat.first.id).descendants.pluck(:id)
+    cat_ids << item_id
+
+    @items = Item.where(category_id: cat_ids)
+
 
     @item = @items.sample
 
+    binding.pry
+
     @next_item = @items.sample
-    # @next_item = Item.where(:id => rand(1000)).first
+    # next_item_cat(@items)
 
     render '/items/category/show.html.erb'
   end
@@ -171,6 +172,14 @@ class ItemsController < ApplicationController
 
 
   private
+
+  # def next_item_cat(items)
+
+  #   @user = current_user
+
+  #   if
+  #     items.sample
+  # end
 
   def next_item
 
