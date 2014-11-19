@@ -15,59 +15,7 @@ class ItemsController < ApplicationController
     last = Item.last.id
     rand_number = (first..last).to_a.sample
 
-
-# Determines what will be shown next
-
-    # if a first-time user (no history yet)
-    if @user.histories.count < 20  
-
-      @next_item = Item.where(:id => rand(1000)).first
-
-    # if user has history record
-    else
-
-      liked_items = @user.histories.where(:liked => true)
-
-      brands_liked = liked_items.each_with_object(Hash.new(0)) { |item,counts| counts[item.item.brand] += 1 }
-      categories_liked = liked_items.each_with_object(Hash.new(0)) { |item,counts| counts[item.item.category.name] += 1 }
-    
-      def get_favourite(list)
-        counts = []
-        # gets all the item counts and adds to 'counts' array
-        list.each do |pair|
-          counts << pair[1]
-        end
-        #finds out the two highest counts from the 'counts' array
-        highest_counts = counts.sort.uniq
-
-        if highest_counts.length > 1 
-          highest_counts = highest_counts[-2..-1]
-        else
-          highest_counts
-        end
-
-        #makes an array of the brand or category that has the highest counts
-        list.map{|item, count| item if highest_counts.include?count }.compact
-      end
-
-      fave_brands = get_favourite(brands_liked)
-      fave_categories = get_favourite(categories_liked)
-
-      # selects what item to show next
-
-      # takes only items that are not in the user's history
-      items_not_in_history = Item.where.not(:id => @user.histories.pluck(:item_id))
-
-
-      # color
-
-      # gives two options: 1. a random item, 2. an item from a favourite brand
-      items_to_show = [items_not_in_history.sample, items_not_in_history.sample, items_not_in_history.sample, items_not_in_history.where(brand: fave_brands.sample).sample ]
-
-      #chooses randomly from the 'items_to_show' options
-      @next_item = items_to_show.sample
-
-    end
+    @next_item = next_item
 
   end
 
@@ -141,12 +89,15 @@ class ItemsController < ApplicationController
   end
 
   def cat_womens
+    @user = current_user
+    @next_item = next_item
 
     render '/items/category/womens/index.html.erb'
   end
 
   def cat_mens
-
+    @user = current_user
+    @next_item = next_item
     render '/items/category/mens/index.html.erb'
   end
 
@@ -167,7 +118,71 @@ class ItemsController < ApplicationController
         @item = @items.sample
     end
 
+    @next_item = next_item
+
+
     render '/items/category/show.html.erb'
+  end
+
+
+  private
+
+  def next_item
+
+# Determines what will be shown next
+
+    # if a first-time user (no history yet)
+    if @user.histories.count < 20  
+
+      @next_item = Item.where(:id => rand(1000)).first
+
+    # if user has history record
+    else
+
+      liked_items = @user.histories.where(:liked => true)
+
+      brands_liked = liked_items.each_with_object(Hash.new(0)) { |item,counts| counts[item.item.brand] += 1 }
+      categories_liked = liked_items.each_with_object(Hash.new(0)) { |item,counts| counts[item.item.category.name] += 1 }
+    
+      def get_favourite(list)
+        counts = []
+        # gets all the item counts and adds to 'counts' array
+        list.each do |pair|
+          counts << pair[1]
+        end
+        #finds out the two highest counts from the 'counts' array
+        highest_counts = counts.sort.uniq
+
+        if highest_counts.length > 1 
+          highest_counts = highest_counts[-2..-1]
+        else
+          highest_counts
+        end
+
+        #makes an array of the brand or category that has the highest counts
+        list.map{|item, count| item if highest_counts.include?count }.compact
+      end
+
+      fave_brands = get_favourite(brands_liked)
+      fave_categories = get_favourite(categories_liked)
+
+      # selects what item to show next
+
+      # takes only items that are not in the user's history
+      items_not_in_history = Item.where.not(:id => @user.histories.pluck(:item_id))
+
+
+      # color
+
+      # gives two options: 1. a random item, 2. an item from a favourite brand
+      items_to_show = [items_not_in_history.sample, items_not_in_history.sample, items_not_in_history.sample, items_not_in_history.where(brand: fave_brands.sample).sample ]
+
+      #chooses randomly from the 'items_to_show' options
+     
+      @next_item = items_to_show.sample
+
+    end
+    
   end
 
 
