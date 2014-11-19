@@ -88,15 +88,15 @@ class ItemsController < ApplicationController
   def convert_top_level_name(gender)
     category = gender
 
-    if category == "womens"
-      category = "female"
+    if category == "womens" || "Womens"
+      @category = "female"
       @name = "Womens"
-    elsif category == "mens"
-      category = "male"
+    elsif category == "mens" || "Mens"
+      @category = "male"
       @name = "Mens"
     end
 
-    category
+    @category
   end
 
   def top_category
@@ -129,7 +129,8 @@ class ItemsController < ApplicationController
   end
 
   def category_1_view
-    @gender = params[:gender]
+    gender_old = params[:gender]
+    @gender = convert_top_level_name(gender_old)
     @user = current_user
 
     # finds the items of the category you are looking for. Little SQL magic
