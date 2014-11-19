@@ -124,6 +124,7 @@ class ItemsController < ApplicationController
 
   def category_1_view
     @gender = params[:gender]
+    @user = current_user
     # @category_old = params[:category_1]
     # @category_old.capitalize!
     # @category = Category.where(name: @category_old)
@@ -138,7 +139,8 @@ class ItemsController < ApplicationController
 
     @item = @items.sample
 
-    @next_item = @items.sample
+    @next_item = next_item
+ 
     # @next_item = Item.where(:id => rand(1000)).first
 
     render '/items/category/show.html.erb'
@@ -175,9 +177,17 @@ class ItemsController < ApplicationController
 # Determines what will be shown next
 
     # if a first-time user (no history yet)
+    
     if @user.histories.count < 20
+      if params['color'] != nil
+        raise
+          if params['color'] == ""
+            @next_item = Item.where(:id => rand(1000)).first
+          else
+            @next_item = Item.where(:id => rand(1000), :color => params['color']).first  
+          end
+      end
 
-      @next_item = Item.where(:id => rand(1000)).first
 
     # if user has history record
     else
