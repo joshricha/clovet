@@ -86,15 +86,15 @@ class ItemsController < ApplicationController
   end
 
   def convert_top_level_name(gender)
-    category = gender
+    category = gender.downcase
 
-    if category == "womens" || "Womens"
-      @category = "female"
-      @name = "Womens"
-    elsif category == "mens" || "Mens"
-      @category = "male"
-      @name = "Mens"
-    end
+      if category == ("womens" || "Womens")
+        @category = "female"
+        @name = "Womens"
+      elsif category == ("mens" || "Mens")
+        @category = "male"
+        @name = "Mens"
+      end
 
     @category
   end
