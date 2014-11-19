@@ -1,37 +1,62 @@
 <%= link_to "Home", root_path %>
 
-<img src="<%= @item.image_url400 %>" alt="">
-<%= @item.name %>
+  <div id="viewport">
+    <ul class="stack" id="img-source">
+      <li class="spades">
+         <img src="<%= @item.image_url400 %>" alt="">
 
+          <div class="yes"></div>
+          <div class="no"></div>
+      </li>
+    </ul>
+  </div>
 
-<div id="like" data-item-id="<%= @item.id%>" data-like="true" data-clicked-through="false">
-  <%=    link_to "Like", @like %>
+<div id="item-details">
+  <p><%= @item.name %></p>
+  <p>$<%= @item.price %> AUD</p>
 </div>
 
-<div id="dislike" data-item-id="<%= @item.id%>" data-like="false" data-clicked-through="false">
-  <%=    link_to "Dislike", @dislike %>
-</div>
-
-<div id="buy" data-item-id="<%= @item.id%>" data-like="true" data-clicked-through="true">
-  <%= link_to "Buy", @item.merchant_url, :target => '_blank'  %>
-</div>
+<%= render '/items/category/history' %>
+<%#= render '/items/category/color' %>
 
 
 <script>
+  var swingIt = function(){
 
-  var add_to_history = function() {
-  $.ajax({
-      type: 'POST',
-      url: '/add_to_history',
-      data: { itemId: $(this).attr('data-item-id'),
-              likeOrNot: $(this).attr('data-like'),
-              clickedThrough: $(this).attr('data-clicked-through') }
-    });
-  }
+        var stack = gajus.Swing.Stack(),
+            cardElement = document.querySelector('.stack li'),
+            throwOutConfidenceBind = document.querySelector('#throw-out-confidence-bind'),
+            directionBind = document.querySelector('#direction-bind'),
+            throwOutConfidenceElements = {};
 
+        window.card = stack.createCard(cardElement);
 
-  $('#like').on('click', add_to_history);
-  $('#dislike').on('click', add_to_history);
-  $('#buy').on('click', add_to_history);
+        stack.on('dragstart', function (e) {
+            throwOutConfidenceElements.yes = e.target.querySelector('.yes').style;
+            throwOutConfidenceElements.no  = e.target.querySelector('.no').style;
+        });
 
+        stack.on('dragmove', function (e) {
+            throwOutConfidenceElements[e.throwDirection == gajus.Swing.Card.DIRECTION_RIGHT ? 'yes' : 'no'].opacity = e.throwOutConfidence;
+        });
+
+        stack.on('dragend', function (e) {
+            if (e.throwOutConfidence != 1) {
+                throwOutConfidenceElements.yes.opacity = 0;
+                throwOutConfidenceElements.no.opacity  = 0;
+            }
+        });
+
+        stack.on('throwoutleft', function() {
+          $("#disliked").submit()
+        });
+
+        stack.on('throwoutright', function(){
+          $('#liked').submit()
+        })
+
+    }; // ends swingIt
+
+        swingIt();
 </script>
+
