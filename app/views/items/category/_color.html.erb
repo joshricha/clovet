@@ -1,6 +1,6 @@
+
 <!-- captures and sends color value to show as filter -->
 <%= form_tag item_path, :method => 'get', :id => "all_colors" do %>
-
 <button>all</button>
 <% end %>
 
@@ -14,6 +14,11 @@
 <button>white</button>
 <% end %>
 
+<%= form_tag item_path, :method => 'get', :id => "grey" do %>
+<%= hidden_field_tag 'color', 'Grey' %>
+<button>Grey</button>
+<% end %>
+
 <%= form_tag item_path, :method => 'get', :id => "pink" do %>
 <%= hidden_field_tag 'color', 'Pink' %>
 <button>pink</button>
@@ -24,7 +29,32 @@
 <button>red</button>
 <% end %>
 
+<%= form_tag item_path, :method => 'get', :id => "orange" do %>
+<%= hidden_field_tag 'color', 'Orange' %>
+<button>orange</button>
+<% end %>
+
 <%= form_tag item_path, :method => 'get', :id => "blue" do %>
 <%= hidden_field_tag 'color', 'Blue' %>
 <button>blue</button>
+<% end %>
+
+<%= form_tag item_path, :method => 'get', :id => "navy" do %>
+<%= hidden_field_tag 'color', 'Navy' %>
+<button>navy</button>
+<% end %>
+
+<%= form_tag item_path, :method => 'get', :id => "brown" do %>
+<%= hidden_field_tag 'color', 'Brown' %>
+<button>brown</button>
+<% end %>
+
+<%= form_tag item_path, :method => 'get', :id => "gold" do %>
+<%= hidden_field_tag 'color', 'Gold' %>
+<button>gold</button>
+<% end %>
+
+<%= form_tag item_path, :method => 'get', :id => "nude" do %>
+<%= hidden_field_tag 'color', 'Nude' %>
+<button>nude</button>
 <% end %>

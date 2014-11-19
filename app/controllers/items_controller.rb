@@ -88,15 +88,15 @@ class ItemsController < ApplicationController
   def convert_top_level_name(gender)
     category = gender
 
-    if category == "womens"
-      category = "female"
+    if category == "womens" || "Womens"
+      @category = "female"
       @name = "Womens"
-    elsif category == "mens"
-      category = "male"
+    elsif category == "mens" || "Mens"
+      @category = "male"
       @name = "Mens"
     end
 
-    category
+    @category
   end
 
   def top_category
@@ -116,26 +116,29 @@ class ItemsController < ApplicationController
     @gender = convert_top_level_name(@gender_old)
     @cat1 = params[:category_1]
 
-    id = Category.where(name: @cat1).first.id
-    @children = Category.find(id).children
+    @children = Category.find_by(name: @gender).descendants.find_by(name: @cat1).children
+
+
+
+    # @children = Category.find_by(name: @gender).children
+    # @children = Category.find_by(name: @gender).descendants.where(name: @cat1).first.descendants
+    # @children = Category.find(id).children
+    # Category.find_by(name: @gender).children
 
     render '/items/category/index.html.erb'
   end
 
   def category_1_view
-    @gender = params[:gender]
-    @user = current_user
-    # @category_old = params[:category_1]
-    # @category_old.capitalize!
-    # @category = Category.where(name: @category_old)
 
+    gender_old = params[:gender]
+    @gender = convert_top_level_name(gender_old)
+    @user = current_user
+
+
+    # finds the items of the category you are looking for. Little SQL magic
     @items = Category.find_by(name: @gender).descendants.where("lower(name) = ?", params[:category_1]).first.items
 
-    # gets all item ids in the chosen category
-    @item_ids = []
-    @items.each do |item|
-      @item_ids << item.id
-    end
+    @user.histories
 
     @item = @items.sample
 
