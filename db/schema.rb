@@ -17,7 +17,6 @@ ActiveRecord::Schema.define(version: 20141118024715) do
   enable_extension "plpgsql"
 
   create_table "categories", force: true do |t|
-    t.integer  "parent_id"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
