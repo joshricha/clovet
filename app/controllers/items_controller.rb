@@ -9,13 +9,125 @@ class ItemsController < ApplicationController
 
   def show
     @user = current_user
-
     @item = Item.find(params[:id])
 
     first = Item.first.id
     last = Item.last.id
     rand_number = (first..last).to_a.sample
 
+    @next_item = next_item
+
+  end
+
+  def create_history
+
+    user = current_user
+
+    new_history = History.new
+    new_history.user_id = user.id
+    new_history.item_id = params['item_id']
+    new_history.liked = if params['liked'] == 'true'
+                          true
+                        else
+                          false
+                        end
+    new_history.in_wishlist = if params['liked'] == 'true'
+                          true
+                        else
+                          false
+                        end
+    new_history.clicked_through = params['clicked_through']
+    new_history.save
+
+    redirect_to item_path(params['next_item'])
+
+  end
+
+  def create_history_from_buy
+    user = current_user
+
+    new_history = History.new
+    new_history.user_id = user.id
+    new_history.item_id = params['item_id']
+    new_history.liked = if params['liked'] == 'true'
+                          true
+                        else
+                          false
+                        end
+    new_history.in_wishlist = if params['liked'] == 'true'
+                          true
+                        else
+                          false
+                        end
+    new_history.clicked_through = params['clicked_through']
+    new_history.save
+   
+    redirect_to new_history.item.merchant_url
+    
+  end
+
+  def edit_history
+    user = current_user
+    current_history_item = user.histories.where(:item_id => params['item_id']).first
+    current_history_item.clicked_through = params['clicked_through']
+    current_history_item.save
+
+    redirect_to current_history_item.item.merchant_url
+  end
+
+  def delete_from_wishlist
+    user = current_user
+    current_history_item = user.histories.where(:item_id => params['item_id']).first
+    current_history_item.in_wishlist = false
+    current_history_item.save
+
+    redirect_to user_wishlist_path
+  end
+
+  def details
+    @item = Item.where(:id => params['id']).first
+  end
+
+  def cat_womens
+    @user = current_user
+    @next_item = next_item
+
+    render '/items/category/womens/index.html.erb'
+  end
+
+  def cat_mens
+    @user = current_user
+    @next_item = next_item
+    render '/items/category/mens/index.html.erb'
+  end
+
+  def category_all
+    @user = current_user
+
+    @category = params[:category]
+
+    case @category
+      when 'womens'
+        @category == 'womens'
+        @items = Item.all.where(:gender => "female")
+        @items += Item.all.where(:gender => "unisex")
+        @item = @items.sample
+      when 'mens'
+        @items = Item.all.where(:gender => "male")
+        @items += Item.all.where(:gender => "unisex")
+        @item = @items.sample
+    end
+
+    @next_item = next_item
+
+
+    render '/items/category/show.html.erb'
+  end
+
+
+  private
+
+  def next_item
 
 # Determines what will be shown next
 
@@ -30,7 +142,7 @@ class ItemsController < ApplicationController
       liked_items = @user.histories.where(:liked => true)
 
       brands_liked = liked_items.each_with_object(Hash.new(0)) { |item,counts| counts[item.item.brand] += 1 }
-      categories_liked = liked_items.each_with_object(Hash.new(0)) { |item,counts| counts[item.item.category.child] += 1 }
+      categories_liked = liked_items.each_with_object(Hash.new(0)) { |item,counts| counts[item.item.category.name] += 1 }
     
       def get_favourite(list)
         counts = []
@@ -58,68 +170,20 @@ class ItemsController < ApplicationController
 
       # takes only items that are not in the user's history
       items_not_in_history = Item.where.not(:id => @user.histories.pluck(:item_id))
+
+
+      # color
+
       # gives two options: 1. a random item, 2. an item from a favourite brand
       items_to_show = [items_not_in_history.sample, items_not_in_history.sample, items_not_in_history.sample, items_not_in_history.where(brand: fave_brands.sample).sample ]
 
       #chooses randomly from the 'items_to_show' options
+     
       @next_item = items_to_show.sample
 
     end
-
+    
   end
 
-  def create_history
-
-    @user = current_user
-
-    new_history = History.new
-    new_history.user_id = @user.id
-    new_history.item_id = params['item_id']
-    new_history.liked = if params['liked'] == 'true'
-                          true
-                        else
-                          false
-                        end
-    new_history.in_wishlist = if params['liked'] == 'true'
-                          true
-                        else
-                          false
-                        end
-    new_history.clicked_through = params['clicked_through']
-    new_history.save
-
-    redirect_to item_path(params['next_item'])
-
-  end
-
-  def cat_womens
-
-    render '/items/category/womens/index.html.erb'
-  end
-
-  def cat_mens
-
-    render '/items/category/mens/index.html.erb'
-  end
-
-  def category_all
-    @user = current_user
-
-    @category = params[:category]
-
-    case @category
-      when 'womens'
-        @category == 'womens'
-        @items = Item.all.where(:gender => "female")
-        @items += Item.all.where(:gender => "unisex")
-        @item = @items.sample
-      when 'mens'
-        @items = Item.all.where(:gender => "male")
-        @items += Item.all.where(:gender => "unisex")
-        @item = @items.sample
-    end
-
-    render '/items/category/show.html.erb'
-  end
 
 end

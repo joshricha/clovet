@@ -1,0 +1,24 @@
+<%= form_tag create_history_path, :method => 'post', :id => "liked" do %>
+<%= hidden_field_tag 'item_id', @item.id %>
+<%= hidden_field_tag 'liked', 'true'  %>
+<%= hidden_field_tag 'clicked_through', 'false'  %>
+<%= hidden_field_tag 'next_item', @next_item.id  %>
+<%= submit_tag 'liked' %>
+<% end %>
+
+
+<%= form_tag create_history_path, :method => 'post', :id => "disliked" do %>
+<%= hidden_field_tag 'item_id', @item.id %>
+<%= hidden_field_tag 'liked', 'false'  %>
+<%= hidden_field_tag 'clicked_through', 'false'  %>
+<%= hidden_field_tag 'next_item', @next_item.id  %>
+<%= submit_tag 'disliked' %>
+<% end %>
+
+<%= form_tag('/create_history', :method => 'post') do %>
+<%= hidden_field_tag 'item_id', @item.id %>
+<%= hidden_field_tag 'liked', 'true'  %>
+<%= hidden_field_tag 'clicked_through', 'true'  %>
+<%= hidden_field_tag 'next_item', @next_item.id  %>
+<%= submit_tag 'buy' %>
+<% end %>
