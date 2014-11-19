@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   post '/create_history' => 'items#create_history'
   post '/edit_history' => 'items#edit_history'
   post '/create_history_from_buy' => 'items#create_history_from_buy'
+  get '/delete_from_wishlist' => 'items#delete_from_wishlist'
 
   get '/items/category/mens/all' => 'items#cat_mens'
   get '/items/category/womens/all' => 'items#cat_womens'

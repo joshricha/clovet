@@ -8,9 +8,11 @@
 	
 		<%= link_to wishlist_item.name, item_details_path(wishlist_item.id) %>
 
-		 <%= wishlist_item.price %>
-		
+		<%= wishlist_item.price %>
 
+		<%= link_to 'delete', delete_from_wishlist_path(:item_id => wishlist_item.id) %>
 	</li>
 	<% end %>
 </ul>
+
+<%= link_to 'Back', root_path  %>
