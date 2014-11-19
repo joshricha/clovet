@@ -4,17 +4,19 @@
     <ul class="stack" id="img-source">
       <li class="spades">
          <img src="<%= @item.image_url400 %>" alt="">
-
+          
           <div class="yes"></div>
           <div class="no"></div>
       </li>
     </ul>
-  </div>
+  </div> 
 
 <div id="item-details">
   <p><%= @item.name %></p>
   <p>$<%= @item.price %> AUD</p>
 </div>
+
+TEST!!!
 
 <%= render '/items/category/history' %>
 <%#= render '/items/category/color' %>
@@ -37,7 +39,7 @@
         });
 
         stack.on('dragmove', function (e) {
-            throwOutConfidenceElements[e.throwDirection == gajus.Swing.Card.DIRECTION_RIGHT ? 'yes' : 'no'].opacity = e.throwOutConfidence;
+            throwOutConfidenceElements[e.throwDirection == gajus.Swing.Card.DIRECTION_RIGHT ? 'yes' : 'no'].opacity = e.throwOutConfidence;       
         });
 
         stack.on('dragend', function (e) {
@@ -54,7 +56,7 @@
         stack.on('throwoutright', function(){
           $('#liked').submit()
         })
-
+        
     }; // ends swingIt
 
         swingIt();

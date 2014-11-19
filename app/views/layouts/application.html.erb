@@ -12,8 +12,6 @@
 
 <body>
 
-  <div class="container">
-
     <li><%= link_to 'Home', root_path %></li>
     <% if logged_in? %>
 
@@ -21,15 +19,16 @@
       <li><%= link_to 'logout', login_path, :method => :delete, :data => { :confirm => 'Log out?' } %></li>
     <% else %>
 
-      <% if logged_in? %>
-        <div><%= link_to 'logout', login_path, :method => :delete, :data => { :confirm => 'are you sure?' } %></div>
-      <% else %>
-        <li><%= link_to 'login', login_path %></li>
-        <li><%= link_to 'sign up', sign_up_path %></li>
-      <% end %>
+      <li><%= link_to 'login', login_path %></li>
+      <li><%= link_to 'sign up', sign_up_path %></li>
 
-    <%= yield %>
-  </div>
+
+    <% end %>
+
+
+
+<%= yield %>
+
 
 </body>
 </html>

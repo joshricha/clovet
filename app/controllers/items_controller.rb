@@ -16,8 +16,8 @@ class ItemsController < ApplicationController
     rand_number = (first..last).to_a.sample
 
     @next_item = next_item
-  end
 
+  end
 
   def create_history
 
@@ -88,86 +88,84 @@ class ItemsController < ApplicationController
     @item = Item.where(:id => params['id']).first
   end
 
+  def convert_top_level_name(gender)
+    category = gender
 
-  def check_top_level_cat
-    @category = params[:category]
-    @name = @category.capitalize
-
-    if @category == "womens"
-      @category = "female"
+    if category == "womens"
+      category = "female"
       @name = "Womens"
-    elsif @category == "mens"
-      @category = "male"
+    elsif category == "mens"
+      category = "male"
       @name = "Mens"
     end
+
+    category
+  end
+
+  def top_category
+    @gender_old = params[:gender]
+
+    @gender = convert_top_level_name(@gender_old)
+
+    id = Category.where(name: @gender).first.id
+
+    @children = Category.find(id).children
+
+    render '/items/category/index.html.erb'
+  end
+
+  def category_1
+    @gender_old = params[:gender]
+    @gender = convert_top_level_name(@gender_old)
+    @cat1 = params[:category_1]
+
+    id = Category.where(name: @cat1).first.id
+    @children = Category.find(id).children
+
+    render '/items/category/index.html.erb'
+  end
+
+  def category_1_view
+    @gender = params[:gender]
+    # @category_old = params[:category_1]
+    # @category_old.capitalize!
+    # @category = Category.where(name: @category_old)
+
+    @items = Category.find_by(name: @gender).descendants.where("lower(name) = ?", params[:category_1]).first.items
+
+    # gets all item ids in the chosen category
+    @item_ids = []
+    @items.each do |item|
+      @item_ids << item.id
+    end
+
+    @item = @items.sample
+
+    @next_item = @items.sample
+    # @next_item = Item.where(:id => rand(1000)).first
+
+    render '/items/category/show.html.erb'
   end
 
   def category_all
     @user = current_user
 
-    check_top_level_cat
-
-    @items = Item.all.where(:gender => @category)
-    # @items += Item.all.where(:gender => "unisex")
-    @item = @items.sample
-
-  def cat_womens
-    @user = current_user
-    @next_item = next_item
-
-    render '/items/category/show.html.erb'
-  end
-
-  def category_menu_1
-    @parent = params[:category]
-
-    check_top_level_cat
-
-    id = Category.where(name: @category).first.id
-
-    @children = Category.find(id).children
-
-    render "/items/category/#{@parent}/index.html.erb"
-
-  def cat_mens
-    @user = current_user
-    @next_item = next_item
-    render '/items/category/mens/index.html.erb'
-  end
-
-  def category_menu_2
-    @gender = params[:gender]
-    @parent = params[:gender]
     @category = params[:category]
-
-    check_top_level_cat
-
-    id = Category.where(name: @category).first.id
-
-    @children = Category.find(id).children
-
-    render "/items/category/:gender/index.html.erb"
-  end
-
-  def category
     @gender = params[:gender]
-    @category = params[:category]
 
-    if @gender == "womens"
-      @gender = "female"
-    elsif @gender == "mens"
-      @gender = "male"
+    case @category || @gender
+      when 'womens'
+        @category == 'womens'
+        @items = Item.all.where(:gender => "female")
+        @items += Item.all.where(:gender => "unisex")
+        @item = @items.sample
+      when 'mens'
+        @items = Item.all.where(:gender => "male")
+        @items += Item.all.where(:gender => "unisex")
+        @item = @items.sample
     end
 
-    if @gender == "female"
-      render '/items/category/womens/index.html.erb'
-    elsif @gender == "male"
-      render '/items/category/mens/index.html.erb'
-    end
-  end
-
     @next_item = next_item
-
 
     render '/items/category/show.html.erb'
   end
@@ -232,5 +230,6 @@ class ItemsController < ApplicationController
     end
 
   end
+
 
 end
