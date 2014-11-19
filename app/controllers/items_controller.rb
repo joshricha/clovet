@@ -86,15 +86,15 @@ class ItemsController < ApplicationController
   end
 
   def convert_top_level_name(gender)
-    category = gender
+    category = gender.downcase
 
-    if category == "womens" || "Womens"
-      @category = "female"
-      @name = "Womens"
-    elsif category == "mens" || "Mens"
-      @category = "male"
-      @name = "Mens"
-    end
+      if category == ("womens" || "Womens")
+        @category = "female"
+        @name = "Womens"
+      elsif category == ("mens" || "Mens")
+        @category = "male"
+        @name = "Mens"
+      end
 
     @category
   end
@@ -118,13 +118,6 @@ class ItemsController < ApplicationController
 
     @children = Category.find_by(name: @gender).descendants.find_by(name: @cat1).children
 
-
-
-    # @children = Category.find_by(name: @gender).children
-    # @children = Category.find_by(name: @gender).descendants.where(name: @cat1).first.descendants
-    # @children = Category.find(id).children
-    # Category.find_by(name: @gender).children
-
     render '/items/category/index.html.erb'
   end
 
@@ -135,16 +128,22 @@ class ItemsController < ApplicationController
     @user = current_user
 
 
-    # finds the items of the category you are looking for. Little SQL magic
-    @items = Category.find_by(name: @gender).descendants.where("lower(name) = ?", params[:category_1]).first.items
+    @items_cat = Category.find_by(name: @gender).descendants.where("lower(name) = ?", params[:category_1])
 
-    @user.histories
+    # gets the original category id to include with all descending ids
+    item_id = @items_cat.first.id
+    cat_ids = Category.find(@items_cat.first.id).descendants.pluck(:id)
+    cat_ids << item_id
+
+    @items = Item.where(category_id: cat_ids)
+
 
     @item = @items.sample
 
-    @next_item = next_item
- 
-    # @next_item = Item.where(:id => rand(1000)).first
+
+    @next_item = @items.sample
+    # next_item_cat(@items)
+
 
     render '/items/category/show.html.erb'
   end
@@ -174,6 +173,14 @@ class ItemsController < ApplicationController
 
 
   private
+
+  # def next_item_cat(items)
+
+  #   @user = current_user
+
+  #   if
+  #     items.sample
+  # end
 
   def next_item
 
@@ -221,7 +228,7 @@ class ItemsController < ApplicationController
 
       fave_brands = get_favourite(brands_liked)
       fave_categories = get_favourite(categories_liked)
-
+   
       # selects what item to show next
 
       # takes only items that are not in the user's history
@@ -235,7 +242,6 @@ class ItemsController < ApplicationController
           items_not_in_history = items_not_in_history.where(:color => params['color'])
         end
       end
-
 
       # gives two options: 1. three random items, 2. one item from a favourite brand
       items_to_show = [items_not_in_history.sample, items_not_in_history.sample, items_not_in_history.sample, items_not_in_history.where(brand: fave_brands.sample).sample ]
