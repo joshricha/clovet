@@ -11,13 +11,8 @@ class ItemsController < ApplicationController
     @user = current_user
     @item = Item.find(params[:id])
 
-    first = Item.first.id
-    last = Item.last.id
-    rand_number = (first..last).to_a.sample
-
     @next_item = next_item
-    # raise 'something wrong with my next item method' unless @next_item
- 
+    @item = next_item if params[:color]
 
   end
 
@@ -174,24 +169,29 @@ class ItemsController < ApplicationController
       items_not_in_history = Item.where.not(:id => @user.histories.pluck(:item_id), :category_id => 148)
 
       # if there's a color selected
-      if params['color'] != nil && params['color'] != '-'  
+      if params['color'] != nil 
+        if params['color'] == ""
+          items_not_in_history 
+        else
           items_not_in_history = items_not_in_history.where(:color => params['color'])
+        end
       end
 
-      # gives two options: 1. a random item, 2. an item from a favourite brand
+   
+      # gives two options: 1. three random items, 2. one item from a favourite brand
       items_to_show = [items_not_in_history.sample, items_not_in_history.sample, items_not_in_history.sample, items_not_in_history.where(brand: fave_brands.sample).sample ]
-      # logger.debug "items_to_show: #{items_to_show}"
-
+     
+ 
       #chooses randomly from the 'items_to_show' options
       @sampled = items_to_show.sample
 
-      #gets another item (from the items_to_show)
+
+      #sets the @next item -- chooses another item (from the items_to_show) if @sampled is a nil
       if @sampled != nil
         @next_item = @sampled
       else
         @next_item = items_to_show.first
       end
-
 
     end
     
