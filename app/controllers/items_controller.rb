@@ -210,7 +210,7 @@ class ItemsController < ApplicationController
 
       fave_brands = get_favourite(brands_liked)
       fave_categories = get_favourite(categories_liked)
-
+   
       # selects what item to show next
 
       # takes only items that are not in the user's history
@@ -224,7 +224,6 @@ class ItemsController < ApplicationController
           items_not_in_history = items_not_in_history.where(:color => params['color'])
         end
       end
-
 
       # gives two options: 1. three random items, 2. one item from a favourite brand
       items_to_show = [items_not_in_history.sample, items_not_in_history.sample, items_not_in_history.sample, items_not_in_history.where(brand: fave_brands.sample).sample ]
