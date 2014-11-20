@@ -17,6 +17,13 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.right {
+  text-align: right;
+}
+.left {
+  text-align: left;
+}
+
 #liked_submit {
 	display: none;
 }
@@ -42,7 +49,7 @@ html {
 
 }
 
-.brand-bar {
+/*.brand-bar {
   background-color: black;
   color: white;
   width: 100%;
@@ -58,7 +65,7 @@ html {
   font-size: 2em;
   padding-top: 0.4em;
 
-}
+}*/
 
 .login-container {
   text-align: center;
@@ -78,6 +85,20 @@ html {
   margin: 0.5em auto;
 }
 
+.dropdown-menu > li > a {
+  text-align: right;
+}
+.navbar-collapse > ul > li > a {
+  text-align: right;
+}
+.navbar-toggle {
+  text-align: right;
+}
+.navbar-brand {
+  font-family: 'Prata', serif;
+  font-size: 2em;
+  color: white;
+}
 #grey-btn {
   background-color: rgb(200,200,200);
 }
@@ -86,20 +107,7 @@ html {
   background-color: rgb(150,150,150);
 }
 
-.nav {
-  height: 2.5em;
-  text-align: right;
-  font-family: 'Prata', serif;
-  color: black;
-  position: fixed;
-  margin-top: 4em;
-  background-color:white;
-  width: 100%;
-}
 
-.nav a {
-  color: black;
-}
 
 @media screen and (max-width: 600px) {
   .select-gender {

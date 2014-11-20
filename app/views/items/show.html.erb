@@ -31,16 +31,15 @@ var swingIt = function(){
 
   var config = {
     minThrowOutDistance: 2000,
-    // maxThrowOutDistance: 3000,
     throwOutConfidence: function (offset, element) {
       return Math.min( Math.abs(offset * 4) / element.offsetWidth, 1);
     }
   };
 
   var stack = gajus.Swing.Stack(config),
-      cardElement = document.querySelector('.stack li'),
+      cardElement            = document.querySelector('.stack li'),
       throwOutConfidenceBind = document.querySelector('#throw-out-confidence-bind'),
-      directionBind = document.querySelector('#direction-bind'),
+      directionBind          = document.querySelector('#direction-bind'),
       throwOutConfidenceElements = {};
 
   window.card = stack.createCard(cardElement);
