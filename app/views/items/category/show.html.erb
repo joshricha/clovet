@@ -3,7 +3,7 @@
   <div id="viewport">
     <ul class="stack" id="img-source">
       <li class="spades">
-         <img src="<%= @item.image_url400 %>" alt="">
+         <img src="<%= @next_item.image_url400 %>" alt="">
 
           <div class="yes"></div>
           <div class="no"></div>
@@ -12,13 +12,15 @@
   </div>
 
 <div id="item-details">
-  <p><%= @item.name %></p>
-  <p>$<%= @item.price %> AUD</p>
+  <p><%= @next_item.name %></p>
+  <p>$<%= @next_item.price %> AUD</p>
 </div>
 
 
-<%= render '/items/category/history' %>
-<%#= render '/items/category/color' %>
+
+<%= render 'history' %>
+<p>Filter by colour:</p>
+<%= render 'color' %>
 
 <script>
   var swingIt = function(){

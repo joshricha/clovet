@@ -37,12 +37,19 @@ html {
   width: 100%;
 }
 
+.yield {
+  padding-top: 6.5em;
+
+}
+
 .brand-bar {
   background-color: black;
   color: white;
   width: 100%;
   height: 4em;
   margin-top: 0;
+  position: fixed;
+  display: block;
 }
 
 .brand-bar p {
@@ -84,18 +91,88 @@ html {
   text-align: right;
   font-family: 'Prata', serif;
   color: black;
+  position: fixed;
+  margin-top: 4em;
+  background-color:white;
+  width: 100%;
 }
 
 .nav a {
   color: black;
 }
 
-.select-gender {
-  background-image: url('http://i.imgur.com/uQipJkN.jpg?1');
-  width: 100%;
-  background-position: center top;
-  background-size: cover;
-  background-repeat: no-repeat;
-  padding-bottom: 157%;
-  height: 0;
+@media screen and (max-width: 600px) {
+  .select-gender {
+    background-image: url('http://i.imgur.com/uQipJkN.jpg?1');
+    width: 100%;
+    background-position: center top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-bottom: 157%;
+    height: 0;
+    text-align: center;
+  }
+
+  .select-buttons-div {
+  width: 95%;
+  margin: 0 auto;
+  padding-top: 10em;
+  }
+
+  .select-button {
+  background-color: black;
+  text-align: center;
+  padding-top: 0.5em;
+  width: 16em;
+  }
+
+  #select-mens {
+    width: 14em;
+  }
 }
+
+@media screen and (min-width: 600px) {
+    .select-gender {
+    background-image: url('http://i.imgur.com/uQipJkN.jpg?1');
+    width: 15em;
+    height: 50em;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center top;
+    text-align: center;
+  }
+
+  .select-buttons-div {
+  width: 50em;
+  margin: 0 auto;
+  padding-top: 22em;
+  }
+
+  .select-button {
+  background-color: black;
+  text-align: center;
+  padding-top: 0.5em;
+  width: 20em;
+  }
+}
+
+.select-button a {
+  color: white;
+  font-family: 'Prata', serif;
+  font-size: 3em;
+}
+
+#select-womens {
+  float: right;
+  margin-top: 1em;
+}
+
+.select-gender h1 {
+  color: white;
+  font-family: 'Prata', serif;
+  font-size: 5em;
+  margin: 0;
+  font-style: italic;
+}
+
+

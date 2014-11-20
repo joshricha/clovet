@@ -37,7 +37,7 @@ class ItemsController < ApplicationController
     new_history.save
 
     # gets rid of the spaces on the url
-    next_item_path = URI.encode("/items/category/#{params[:gender]}/#{params[:category_1]}/view")
+    next_item_path = URI.encode("/items/category/#{params[:gender]}/#{params[:category_1]}/view?&color=#{params[:color]}")
     # redirect to a url that contains gender and cat1
     redirect_to next_item_path
 
@@ -143,8 +143,6 @@ class ItemsController < ApplicationController
     # takes only items that are not in the user's history, and NO perfumes
     @items = @items.where.not(:id => @user.histories.pluck(:item_id), :category_id => 148)
 
-    @item = @items.sample
-
     @next_item = next_item
 
     render '/items/category/show.html.erb'
@@ -174,17 +172,8 @@ class ItemsController < ApplicationController
 
   private
 
-  # def next_item_cat(items)
-
-  #   @user = current_user
-
-  #   if
-  #     items.sample
-  # end
-
   def next_item
-
-# Determines what will be shown next
+  # Determines what will be shown next
 
     # if a first-time user (no history yet)
     if @user.histories.count < 20
@@ -232,7 +221,7 @@ class ItemsController < ApplicationController
         if @color == ""
           @items
         else
-          @items = @items.where(:color => params['color'])
+          @items = @items.where(:color => @color)
         end
       end
 
