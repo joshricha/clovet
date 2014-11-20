@@ -29,7 +29,11 @@
   
 var swingIt = function(){
 
-  var stack = gajus.Swing.Stack(),
+  var config = {
+    minThrowOutDistance: 1000
+  }
+
+  var stack = gajus.Swing.Stack(config),
       cardElement = document.querySelector('.stack li'),
       throwOutConfidenceBind = document.querySelector('#throw-out-confidence-bind'),
       directionBind = document.querySelector('#direction-bind'),
