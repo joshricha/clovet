@@ -47,6 +47,7 @@ html {
 }
 
 /*----- navbar -----*/
+
 .dropdown-menu > li > a {
   text-align: right;
 }
@@ -61,6 +62,13 @@ html {
   font-size: 2em;
   color: white;
 }
+.navbar-brand > a {
+  color: white;
+}
+.navbar-header.container-fluid.navbar-brand {
+  color: orange;
+}
+.navbar-toggle
 /*----- navbar -----*/
 
 #grey-btn {
@@ -99,6 +107,7 @@ html {
     height: 0;
     text-align: center;
     position: fixed;
+
   }
 
   .select-buttons-div {
