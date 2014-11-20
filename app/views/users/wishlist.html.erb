@@ -1,18 +1,22 @@
-<h1>User's wishlist</h1>
+<div class="container">
+	<div class="col-md-4"></div>
+		<h1>User's wishlist</h1>
 
-<ul>
-	<% @user_wishlist.each do |item|  %>
-	<% wishlist_item = item.item %>
-	<li>
-		<img src= <%=wishlist_item.image_url50%>> 
-	
-		<%= link_to wishlist_item.name, item_details_path(wishlist_item.id) %>
+			<ul>
+				<% @user_wishlist.each do |item|  %>
+				<% wishlist_item = item.item %>
+				<li class="wishlist">
+					<img src= <%=wishlist_item.image_url50%>>
 
-		<%= wishlist_item.price %>
+					<%= link_to wishlist_item.name, item_details_path(wishlist_item.id) %>
 
-		<%= link_to 'delete', delete_from_wishlist_path(:item_id => wishlist_item.id) %>
-	</li>
-	<% end %>
-</ul>
+					<%= wishlist_item.price %>
 
-<%= link_to 'Back', root_path  %>
+					<i class="glyphicon glyphicon-trash"></i><%= link_to 'delete', delete_from_wishlist_path(:item_id => wishlist_item.id) %>
+				</li>
+				<% end %>
+			</ul>
+
+		<%= link_to 'Back', root_path  %>
+	</div>
+</div>

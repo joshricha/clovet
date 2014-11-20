@@ -162,14 +162,16 @@ class ItemsController < ApplicationController
     @category = params[:category]
     @gender = params[:gender]
 
+
+
     case @category || @gender
       when 'womens'
         @category == 'womens'
         @items = Item.where('gender=? OR gender=?', 'female', 'unisex')
-        @item = @items.sample
+        # @item = @items.sample
       when 'mens'
-        @items = Item.where('gender=? OR gender=?', 'mens', 'unisex')
-        @item = @items.sample
+        @items = Item.where('gender=? OR gender=?', 'male', 'unisex')
+        # @item = @items.sample
     end
 
     @next_item = next_item
@@ -235,6 +237,8 @@ class ItemsController < ApplicationController
 
       # gives two options: 1. three random items, 2. one item from a favourite brand
       items_to_show = [@items.sample, @items.sample, @items.sample, @items.where(brand: fave_brands.sample).sample ]
+
+
 
       #chooses randomly from the 'items_to_show' options
       @sampled = items_to_show.sample

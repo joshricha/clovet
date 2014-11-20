@@ -25,13 +25,14 @@
     <% end %>
 
 
-  <div class="yield">
-    <%= yield %>
 
-    <% if logged_in? %>
-      <li><%= link_to 'logout', login_path, :method => :delete, :data => { :confirm => 'Log out?' } %></li>
-    <% end %>
-  </div>
+    <div class="yield">
+      <%= yield %>
+
+      <% if logged_in? %>
+        <li><%= link_to 'logout', login_path, :method => :delete, :data => { :confirm => 'Log out?' } %></li>
+      <% end %>
+    </div>
 
 
 </body>
