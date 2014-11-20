@@ -1,37 +1,46 @@
-<h1>Sign Up</h1>
+<div class="login-container">
 
-  <% if !@user.errors.empty? %>
-    <% @user.errors.full_messages.each do |msg| %>
-    <p class="error"><%= msg %></p>
+<h1>SIGN UP</h1>
+
+
+  <div class="login-form form-horizontal">
+    <% if !@user.errors.empty? %>
+      <% @user.errors.full_messages.each do |msg| %>
+      <p class="error"><%= msg %></p>
+      <% end %>
     <% end %>
+
+    <%= form_tag '/sign_up', id: "signUp" do %>
+
+      <p>
+        <%= label_tag :username %>
+        <%= text_field_tag :username, params[:username] %>
+      </p>
+      <p>
+        <%= label_tag :password %>
+        <%= password_field_tag :password %>
+      </p>
+      <p>
+        <%= label_tag :password_confirmation %>
+        <%= password_field_tag :password_confirmation %>
+      </p>
+      <button class="btn btn-default" id="grey-btn">SIGN UP</button>
+
   <% end %>
+</div>
 
-  <%= form_tag '/sign_up', id: "signUp" do %>
+<a href="/login"><button class="btn btn-default">I already have a login</button></a>
 
-    <p>
-      <%= label_tag :username %>
-      <%= text_field_tag :username, params[:username] %>
-    </p>
-    <p>
-      <%= label_tag :password %>
-      <%= password_field_tag :password %>
-    </p>
-    <p>
-      <%= label_tag :password_confirmation %>
-      <%= password_field_tag :password_confirmation %>
-    </p>
-    <button>Sign Up</button>
-
-<% end %>
 
 <script>
     // wait for the DOM to be loaded
     $(document).ready(function() {
         // bind 'myForm' and provide a simple callback function
         $('#signUp').ajaxForm(function() {
-            alert("Thank you for your comment!");
+            alert("Thank you for signing up!");
             window.location = "/";
         });
     });
 </script>
 
+</div>
