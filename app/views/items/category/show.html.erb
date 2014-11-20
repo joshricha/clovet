@@ -30,17 +30,19 @@
 </div>
 
 
-<div id="show-page-buy">
-  <%= render '/items/category/history_buy' %>
-</div>
-<div id="show-page-filter">
-  <p>Filter by colour:</p>
-  <!-- checks if it is for "all" or "category" -->
-    <% if params["category_1"] == nil %>
-      <%= render '/items/color_all' %>
-    <% else %>
-      <%= render '/items/category/color' %>
-    <% end %>
+<div id="show-page-bottom">
+  <div id="show-page-buy">
+    <%= render '/items/category/history_buy' %>
+  </div>
+  <div id="show-page-filter">
+    <p id="color-filter-text">Filter by Colour:</p>
+    <!-- checks if it is for "all" or "category" -->
+      <% if params["category_1"] == nil %>
+        <%= render '/items/color_all' %>
+      <% else %>
+        <%= render '/items/category/color' %>
+      <% end %>
+  </div>
 </div>
 
 
