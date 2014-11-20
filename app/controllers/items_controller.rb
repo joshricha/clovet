@@ -136,13 +136,11 @@ class ItemsController < ApplicationController
 
     @items = Item.where(category_id: cat_ids)
 
+
     @item = @items.sample
 
     @next_item = @items.sample
     # next_item_cat(@items)
-
-    # takes only items that are not in the user's history
-    items_not_in_history = @items.where.not(:id => @user.histories.pluck(:item_id), :category_id => 148)
 
     render '/items/category/show.html.erb'
   end
