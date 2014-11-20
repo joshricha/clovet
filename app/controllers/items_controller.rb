@@ -36,8 +36,15 @@ class ItemsController < ApplicationController
     new_history.clicked_through = params['clicked_through']
     new_history.save
 
+    # if category_1 is nil, route leads to "view all *gender*"
+    if params['category_1'] == ""
+      next_item_path = "/items/category/#{params[:gender]}/all"
+    # if category_1 has a value, route leads to "View *gender* *category*"
+    else
+      next_item_path = "/items/category/#{params[:gender]}/#{params[:category_1]}/view?&color=#{params[:color]}"
+    end
     # gets rid of the spaces on the url
-    next_item_path = URI.encode("/items/category/#{params[:gender]}/#{params[:category_1]}/view?&color=#{params[:color]}")
+    next_item_path = URI.encode(next_item_path)
     # redirect to a url that contains gender and cat1
     redirect_to next_item_path
 
@@ -75,13 +82,13 @@ class ItemsController < ApplicationController
     redirect_to current_history_item.item.merchant_url
   end
 
-  def delete_from_wishlist
+  def delete_from_wishlist_liked
     user = current_user
     current_history_item = user.histories.where(:item_id => params['item_id']).first
     current_history_item.in_wishlist = false
     current_history_item.save
 
-    redirect_to user_wishlist_path
+    redirect_to user_wishlist_liked_path
   end
 
   def details
@@ -119,7 +126,7 @@ class ItemsController < ApplicationController
     @gender = convert_top_level_name(@gender_old)
     @cat1 = params[:category_1]
 
-    @children = Category.find_by(name: @gender).descendants.find_by(name: @cat1).children
+    @children = Category.find_by(name: @gender).children
 
     render '/items/category/index.html.erb'
   end
@@ -156,12 +163,10 @@ class ItemsController < ApplicationController
     case @category || @gender
       when 'womens'
         @category == 'womens'
-        @items = Item.where(:gender => "female")
-        @items += Item.where(:gender => "unisex")
+        @items = Item.where('gender=? OR gender=?', 'female', 'unisex')
         @item = @items.sample
       when 'mens'
-        @items = Item.where(:gender => "male")
-        @items += Item.where(:gender => "unisex")
+        @items = Item.where('gender=? OR gender=?', 'mens', 'unisex')
         @item = @items.sample
     end
 
@@ -177,17 +182,16 @@ class ItemsController < ApplicationController
   # Determines what will be shown next
 
     # if a first-time user (no history yet)
-
     if @user.histories.count < 20
-      if @color == nil
-        @next_item = @items.sample
-      else #there's a color params (whether "" or color)
-          if @color == ""
-            @next_item = @items.sample
-          else
-            @next_item = @items.where(:id => rand(1000), :color => params['color']).first
-          end
 
+        if @color == nil
+          @next_item = @items.sample
+        else #there's a color params (whether "" or color)
+            if @color == ""
+              @next_item = @items.sample
+            else
+              @next_item = @items.where(:color => params['color']).sample
+            end
       end
 
 
@@ -213,9 +217,10 @@ class ItemsController < ApplicationController
         highest_counts
       end
 
-
       #makes an array of the brand or category that has the highest counts
       fave_brands = brands_liked.map{|item, count| item if highest_counts.include?count }.compact
+
+
 
       # if there's a color selected
       if @color != nil
