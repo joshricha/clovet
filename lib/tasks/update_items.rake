@@ -35,29 +35,20 @@ task :update_items  => :environment do
       new_item.image_url400 = item["Image400"]
       new_item.active = true
 
+
       category_s = item["Category"]
       categories_array = category_s.split(' > ')
       gender = item["Gender"]
-      categories_array = categories_array.unshift(gender)
-      parent_id = nil
-      gender_id = nil
+      gender_id = Category.find_by(:name => gender).id
+      parent_id = Category.find_by(:name => gender).id
+
       categories_array.each do |category|
-        if category == 'male' || category == 'female' || category == 'unisex'
-          if Category.where(:name => category).length > 0
-            existing = Category.where(:name => category)
-            parent_id = existing.first.id
-            gender_id = existing.first.id
-          else
-            new_category = Category.create(:name => category, :parent_id => parent_id)
+        if Category.find(gender_id).descendants.where(:name => category).empty?
+            new_category = Category.create(:name => category, :parent => Category.find(parent_id))
             parent_id = new_category.id
-            gender_id = new_category.id
-          end
-        elsif Category.find(gender_id).descendants.where(:name => category).length > 0
-            existing = Category.where(:name => category)
-            parent_id = existing.first.id
         else
-          new_category = Category.create(:name => category, :parent_id => parent_id)
-          parent_id = new_category.id
+            existing = Category.find(gender_id).descendants.where(:name => category)
+            parent_id = existing.first.id
         end
       end
 
