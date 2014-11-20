@@ -155,11 +155,12 @@ html {
 
 #item-details {
   font-family: 'Lato', sans-serif;
+  margin-top: 1em;
 }
 
 #show-page-bottom {
   width: 40%;
-  margin: 0 auto;
+  margin: 1em auto;
 }
 
 #show-page-buy {
@@ -184,10 +185,13 @@ html {
   text-align: center;
 }
 
+#viewport {
+  margin-top: 3em;
+}
 
 
 
->>>>>>> 2afc8d3d406b256ddf988551cbe380b7ac4a513d
+
 @media screen and (max-width: 600px) {
   .select-gender {
     background-image: url('http://i.imgur.com/uQipJkN.jpg?1');
@@ -218,6 +222,8 @@ html {
   #select-mens {
     width: 14em;
   }
+
+
 }
 
 @media screen and (min-width: 600px) {
@@ -243,6 +249,8 @@ html {
   padding-top: 0.5em;
   width: 20em;
   }
+
+
 }
 
 .select-button a {
