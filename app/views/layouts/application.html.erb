@@ -4,6 +4,7 @@
   <title>Project2</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
+  <link href='http://fonts.googleapis.com/css?family=Prata' rel='stylesheet' type='text/css'>
   <script src="http://malsup.github.com/jquery.form.js"></script>
   <meta name="viewport" content="width=device-width", "initial-scale=1">
   <%= csrf_meta_tags %>
@@ -11,19 +12,18 @@
 
 
 <body>
+  <div class="brand-bar">
+      <p>CLOVET</p>
+  </div>
 
-    <li><%= link_to 'Home', root_path %></li>
+
     <% if logged_in? %>
-
-      <li><%= link_to 'show wishlist', user_wishlist_path %></li>
+    <div class="nav">
+      <li><%= link_to 'wishlist', user_wishlist_path %></li>
       <li><%= link_to 'logout', login_path, :method => :delete, :data => { :confirm => 'Log out?' } %></li>
-    <% else %>
-
-      <li><%= link_to 'login', login_path %></li>
-      <li><%= link_to 'sign up', sign_up_path %></li>
-
-
+    </div>
     <% end %>
+
 
 
 

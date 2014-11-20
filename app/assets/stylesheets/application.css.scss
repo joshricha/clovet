@@ -33,4 +33,69 @@
 #item-details {
 	text-align: center;
 }
+html {
+  width: 100%;
+}
 
+.brand-bar {
+  background-color: black;
+  color: white;
+  width: 100%;
+  height: 4em;
+  margin-top: 0;
+}
+
+.brand-bar p {
+  text-align: center;
+  font-family: 'Prata', serif;
+  font-size: 2em;
+  padding-top: 0.4em;
+
+}
+
+.login-container {
+  text-align: center;
+  width: 100%;
+  margin-top: 10em;
+  font-family: 'Prata', serif;
+}
+
+.login-form p {
+  font-family: 'Prata', serif;
+  font-style: italic;
+  font-size: 1.5em;
+}
+
+.btn-default {
+  width: 20em;
+  margin: 0.5em auto;
+}
+
+#grey-btn {
+  background-color: rgb(200,200,200);
+}
+
+#grey-btn:hover {
+  background-color: rgb(150,150,150);
+}
+
+.nav {
+  height: 2.5em;
+  text-align: right;
+  font-family: 'Prata', serif;
+  color: black;
+}
+
+.nav a {
+  color: black;
+}
+
+.select-gender {
+  background-image: url('http://i.imgur.com/uQipJkN.jpg?1');
+  width: 100%;
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-bottom: 157%;
+  height: 0;
+}
