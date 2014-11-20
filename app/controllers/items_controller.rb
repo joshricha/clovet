@@ -37,7 +37,7 @@ class ItemsController < ApplicationController
     new_history.save
 
     # gets rid of the spaces on the url
-    next_item_path = URI.encode("/items/category/#{params[:gender]}/#{params[:category_1]}/view")
+    next_item_path = URI.encode("/items/category/#{params[:gender]}/#{params[:category_1]}/view?&color=#{params[:color]}")
     # redirect to a url that contains gender and cat1
     redirect_to next_item_path
 
@@ -143,11 +143,8 @@ class ItemsController < ApplicationController
     # takes only items that are not in the user's history, and NO perfumes
     @items = @items.where.not(:id => @user.histories.pluck(:item_id), :category_id => 148)
 
-    @item = @items.sample
-
-  
     @next_item = next_item
-    
+
     render '/items/category/show.html.erb'
   end
 
@@ -180,15 +177,16 @@ class ItemsController < ApplicationController
   def next_item
   # Determines what will be shown next
 
-    # if a first-time user (no history yet) 
+    # if a first-time user (no history yet)
+
     if @user.histories.count < 20
       if @color == nil
-        @next_item = @items.where(:id => rand(1000)).first
+        @next_item = @items.sample
       else #there's a color params (whether "" or color)
           if @color == ""
-            @next_item = @items.where(:id => rand(1000)).first
+            @next_item = @items.sample
           else
-            @next_item = @items.where(:id => rand(1000), :color => params['color']).first  
+            @next_item = @items.where(:id => rand(1000), :color => params['color']).first
           end
 
       end
@@ -200,7 +198,7 @@ class ItemsController < ApplicationController
       liked_items = @user.histories.where(:liked => true)
 
       brands_liked = liked_items.each_with_object(Hash.new(0)) { |item,counts| counts[item.item.brand] += 1 }
-      
+
 
       counts = []
       # gets all the item counts and adds to 'counts' array
@@ -216,16 +214,16 @@ class ItemsController < ApplicationController
         highest_counts
       end
 
+
       #makes an array of the brand or category that has the highest counts
       fave_brands = brands_liked.map{|item, count| item if highest_counts.include?count }.compact
-    
 
       # if there's a color selected
       if @color != nil
         if @color == ""
           @items
         else
-          @items = @items.where(:color => params['color'])
+          @items = @items.where(:color => @color)
         end
       end
 
