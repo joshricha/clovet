@@ -463,9 +463,17 @@ h1.handwritting {
   color: #000;
 }
 
+
 .navbar-inverse .navbar-brand {
   color: #fff;
 }
+
+@media screen and (max-width: 320px) {
+  .navbar-header {
+
+  }
+}
+
 
 .navbar-inverse .navbar-nav > li > a {
   color: #fff;

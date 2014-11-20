@@ -5,60 +5,16 @@
     <button class="btn_all">all</button>
     <% end %>
 
-    <%= form_tag "/items/category/#{params[:gender]}/all", :method => 'get', :class => "color_btn" do %>
-    <%= hidden_field_tag 'color', 'Black' %>
-    <button class="btn_black">b</button>
-    <% end %>
+    <% color_list = %w(Black White Grey Pink Red Orange Blue Navy Brown Gold Nude)  %> 
 
-    <%= form_tag "/items/category/#{params[:gender]}/all", :method => 'get', :class => "color_btn" do %>
-    <%= hidden_field_tag 'color', 'White'  %>
-    <button class="btn_white">w</button>
-    <% end %>
+    <% color_list.each do |color| %>
 
-    <%= form_tag "/items/category/#{params[:gender]}/all", :method => 'get', :class => "color_btn" do %>
-    <%= hidden_field_tag 'color', 'Grey' %>
-    <button class="btn_grey">g</button>
-    <% end %>
+      <%= form_tag "/items/category/#{params[:gender]}/all", :method => 'get', :class => "color_btn" do %>
+      <%= hidden_field_tag 'color', color %>
+      <button class=<%="btn_#{color.downcase}"%>><%= color.downcase %></button>
+      <% end %>
 
-    <%= form_tag "/items/category/#{params[:gender]}/all", :method => 'get', :class => "color_btn" do %>
-    <%= hidden_field_tag 'color', 'Pink' %>
-    <button class="btn_pink">p</button>
     <% end %>
-
-    <%= form_tag "/items/category/#{params[:gender]}/all", :method => 'get', :class => "color_btn" do %>
-    <%= hidden_field_tag 'color', 'Red' %>
-    <button class="btn_red">r</button>
-    <% end %>
-
-    <%= form_tag "/items/category/#{params[:gender]}/all", :method => 'get', :class => "color_btn" do %>
-    <%= hidden_field_tag 'color', 'Orange' %>
-    <button class="btn_orange">o</button>
-    <% end %>
-
-    <%= form_tag "/items/category/#{params[:gender]}/all", :method => 'get', :class => "color_btn" do %>
-    <%= hidden_field_tag 'color', 'Blue' %>
-    <button class="btn_blue">b</button>
-    <% end %>
-
-    <%= form_tag "/items/category/#{params[:gender]}/all", :method => 'get', :class => "color_btn" do %>
-    <%= hidden_field_tag 'color', 'Navy' %>
-    <button class="btn_navy">n</button>
-    <% end %>
-
-    <%= form_tag "/items/category/#{params[:gender]}/all", :method => 'get', :class => "color_btn" do %>
-    <%= hidden_field_tag 'color', 'Brown' %>
-    <button class="btn_brown">b</button>
-    <% end %>
-
-    <%= form_tag "/items/category/#{params[:gender]}/all", :method => 'get', :class => "color_btn" do %>
-    <%= hidden_field_tag 'color', 'Gold' %>
-    <button class="btn_gold">g</button>
-    <% end %>
-
-    <%= form_tag "/items/category/#{params[:gender]}/all", :method => 'get', :class => "color_btn" do %>
-    <%= hidden_field_tag 'color', 'Nude' %>
-    <button class="btn_nude">nude</button>
-    <% end %>
-
+    
   </div> <!-- ends color  -->
 </div>  <!-- ends container -->

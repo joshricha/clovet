@@ -2,11 +2,6 @@ parsed = JSON.parse(File.read("db/the_iconic_data_feed.json"))
 
 Item.destroy_all
 Category.destroy_all
-# please delete when we have a working app
-User.destroy_all
-
-
-User.create(:name => 'jam', :email => 'jam@jam.com', :password => 'jam', :password_confirmation => 'jam')
 
 Category.create(:name => 'male')
 Category.create(:name => 'female')
