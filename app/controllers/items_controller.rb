@@ -75,13 +75,13 @@ class ItemsController < ApplicationController
     redirect_to current_history_item.item.merchant_url
   end
 
-  def delete_from_wishlist
+  def delete_from_wishlist_liked
     user = current_user
     current_history_item = user.histories.where(:item_id => params['item_id']).first
     current_history_item.in_wishlist = false
     current_history_item.save
 
-    redirect_to user_wishlist_path
+    redirect_to user_wishlist_liked_path
   end
 
   def details
@@ -159,14 +159,10 @@ class ItemsController < ApplicationController
     case @category || @gender
       when 'womens'
         @category == 'womens'
-
         @items = Item.where('gender=? OR gender=?', 'female', 'unisex')
-        # @items = Item.where(:gender => "female")
-        # @items += Item.where(:gender => "unisex")
         @item = @items.sample
       when 'mens'
-        @items = Item.where(:gender => "male")
-        @items += Item.where(:gender => "unisex")
+        @items = Item.where('gender=? OR gender=?', 'mens', 'unisex')
         @item = @items.sample
     end
 
@@ -191,7 +187,6 @@ class ItemsController < ApplicationController
 # Determines what will be shown next
 
     # if a first-time user (no history yet)
-
     if @user.histories.count < 20
 
         if @color == nil
@@ -202,7 +197,7 @@ class ItemsController < ApplicationController
             else
               @next_item = @items.where(:color => params['color']).sample
             end
-        end
+      end
 
 
     # if user has history record
@@ -227,9 +222,10 @@ class ItemsController < ApplicationController
         highest_counts
       end
 
-
       #makes an array of the brand or category that has the highest counts
       fave_brands = brands_liked.map{|item, count| item if highest_counts.include?count }.compact
+
+
 
       # if there's a color selected
       if @color != nil
