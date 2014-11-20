@@ -119,6 +119,7 @@ html {
     padding-bottom: 157%;
     height: 0;
     text-align: center;
+    position: fixed;
   }
 
   .select-buttons-div {
@@ -183,4 +184,34 @@ html {
   font-style: italic;
 }
 
+@media screen and (max-width: 600px) {
+  .select-category {
+    width: 100%;
 
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .select-category {
+    width: 25em;
+    margin: 100px auto;
+  }
+
+  .select-category li {
+    list-style-type: none;
+  }
+}
+
+
+#category-button {
+  width: 100%;
+  margin: 0;
+  padding: 0.1em;
+  font-size: 2em;
+  background-color: black;
+  color: white;
+  font-family: 'Lato', sans-serif;
+}
+#category-button:hover {
+  background-color: rgb(75,75,75)
+}
