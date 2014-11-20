@@ -18,9 +18,10 @@
 
 
     <% if logged_in? %>
-
+    <div class="nav">
       <li><%= link_to 'wishlist', user_wishlist_path %></li>
       <li><%= link_to 'logout', login_path, :method => :delete, :data => { :confirm => 'Log out?' } %></li>
+    </div>
     <% end %>
 
 
