@@ -36,7 +36,10 @@ class ItemsController < ApplicationController
     new_history.clicked_through = params['clicked_through']
     new_history.save
 
-    redirect_to item_path(params['next_item'], :color => params[:color])
+    # gets rid of the spaces on the url
+    next_item_path = URI.encode("/items/category/#{params[:gender]}/#{params[:category_1]}/view")
+    # redirect to a url that contains gender and cat1
+    redirect_to next_item_path
 
   end
 
@@ -72,13 +75,13 @@ class ItemsController < ApplicationController
     redirect_to current_history_item.item.merchant_url
   end
 
-  def delete_from_wishlist
+  def delete_from_wishlist_liked
     user = current_user
     current_history_item = user.histories.where(:item_id => params['item_id']).first
     current_history_item.in_wishlist = false
     current_history_item.save
 
-    redirect_to user_wishlist_path
+    redirect_to user_wishlist_liked_path
   end
 
   def details
@@ -126,7 +129,7 @@ class ItemsController < ApplicationController
     gender_old = params[:gender]
     @gender = convert_top_level_name(gender_old)
     @user = current_user
-
+    @color = params['color']
 
     @items_cat = Category.find_by(name: @gender).descendants.where("lower(name) = ?", params[:category_1])
 
@@ -137,14 +140,14 @@ class ItemsController < ApplicationController
 
     @items = Item.where(category_id: cat_ids)
 
+    # takes only items that are not in the user's history, and NO perfumes
+    @items = @items.where.not(:id => @user.histories.pluck(:item_id), :category_id => 148)
 
     @item = @items.sample
 
-
+    # CHANGE @items.sample TO NEXT ITEM!!!!!!!!!!!
     @next_item = @items.sample
-    # next_item_cat(@items)
-
-
+    
     render '/items/category/show.html.erb'
   end
 
@@ -189,13 +192,15 @@ class ItemsController < ApplicationController
     # if a first-time user (no history yet)
     
     if @user.histories.count < 20
-      if params['color'] != nil
-        raise
-          if params['color'] == ""
-            @next_item = Item.where(:id => rand(1000)).first
+      if @color == nil
+        @next_item = @items.where(:id => rand(1000)).first
+      else #there's a color params (whether "" or color)
+          if @color == ""
+            @next_item = @items.where(:id => rand(1000)).first
           else
-            @next_item = Item.where(:id => rand(1000), :color => params['color']).first  
+            @next_item = @items.where(:id => rand(1000), :color => params['color']).first  
           end
+
       end
 
 
@@ -205,46 +210,38 @@ class ItemsController < ApplicationController
       liked_items = @user.histories.where(:liked => true)
 
       brands_liked = liked_items.each_with_object(Hash.new(0)) { |item,counts| counts[item.item.brand] += 1 }
-      categories_liked = liked_items.each_with_object(Hash.new(0)) { |item,counts| counts[item.item.category.name] += 1 }
+      
 
-      def get_favourite(list)
-        counts = []
-        # gets all the item counts and adds to 'counts' array
-        list.each do |pair|
-          counts << pair[1]
-        end
-        #finds out the two highest counts from the 'counts' array
-        highest_counts = counts.sort.uniq
+      counts = []
+      # gets all the item counts and adds to 'counts' array
+      brands_liked.each do |pair|
+        counts << pair[1]
+      end
+      #finds out the two highest counts from the 'counts' array
+      highest_counts = counts.sort.uniq
 
-        if highest_counts.length > 1
-          highest_counts = highest_counts[-2..-1]
-        else
-          highest_counts
-        end
-
-        #makes an array of the brand or category that has the highest counts
-        list.map{|item, count| item if highest_counts.include?count }.compact
+      if highest_counts.length > 1
+        highest_counts = highest_counts[-2..-1]
+      else
+        highest_counts
       end
 
-      fave_brands = get_favourite(brands_liked)
-      fave_categories = get_favourite(categories_liked)
-   
-      # selects what item to show next
+      #makes an array of the brand or category that has the highest counts
+      fave_brands = brands_liked.map{|item, count| item if highest_counts.include?count }.compact
+    
 
-      # takes only items that are not in the user's history
-      items_not_in_history = Item.where.not(:id => @user.histories.pluck(:item_id), :category_id => 148)
 
       # if there's a color selected
-      if params['color'] != nil
-        if params['color'] == ""
-          items_not_in_history
+      if @color != nil
+        if @color == ""
+          @items
         else
-          items_not_in_history = items_not_in_history.where(:color => params['color'])
+          @items = @items.where(:color => params['color'])
         end
       end
 
       # gives two options: 1. three random items, 2. one item from a favourite brand
-      items_to_show = [items_not_in_history.sample, items_not_in_history.sample, items_not_in_history.sample, items_not_in_history.where(brand: fave_brands.sample).sample ]
+      items_to_show = [@items.sample, @items.sample, @items.sample, @items.where(brand: fave_brands.sample).sample ]
 
       #chooses randomly from the 'items_to_show' options
       @sampled = items_to_show.sample
