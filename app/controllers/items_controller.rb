@@ -136,13 +136,13 @@ class ItemsController < ApplicationController
 
     @items = Item.where(category_id: cat_ids)
 
-
     @item = @items.sample
-
-    binding.pry
 
     @next_item = @items.sample
     # next_item_cat(@items)
+
+    # takes only items that are not in the user's history
+    items_not_in_history = @items.where.not(:id => @user.histories.pluck(:item_id), :category_id => 148)
 
     render '/items/category/show.html.erb'
   end
@@ -219,7 +219,7 @@ class ItemsController < ApplicationController
 
       fave_brands = get_favourite(brands_liked)
       fave_categories = get_favourite(categories_liked)
-   
+
       # selects what item to show next
 
       # takes only items that are not in the user's history
