@@ -19,16 +19,17 @@
 
     <% if logged_in? %>
     <div class="nav">
-      <li><%= link_to 'wishlist', user_wishlist_path %></li>
-      <li><%= link_to 'logout', login_path, :method => :delete, :data => { :confirm => 'Log out?' } %></li>
+      <li><a href="/user/wishlist">wishlist</a></li>
     </div>
     <% end %>
 
 
+  <div class="yield">
+    <%= yield %>
 
-
-<%= yield %>
-
-
+    <% if logged_in? %>
+      <li><%= link_to 'logout', login_path, :method => :delete, :data => { :confirm => 'Log out?' } %></li>
+    <% end %>
+  </div>
 </body>
 </html>
