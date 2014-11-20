@@ -1,4 +1,4 @@
-<%= link_to "Home", root_path %>
+<div class="container">
 
   <div id="viewport">
     <ul class="stack" id="img-source">
@@ -14,23 +14,26 @@
     </ul>
   </div>
 
-<div id="item-details">
-<% if @next_item == nil%>
-  <p>No items are matching your search. Please try again.</p>
-<% else %>
-  <p><%= @next_item.name %></p>
-  <p>$<%= @next_item.price %> AUD</p>
-<% end %>
-</div>
+  <div id="item-details">
+  <% if @next_item == nil%>
+    <p>No items are matching your search. Please try again.</p>
+  <% else %>
+    <p><%= @next_item.name %></p>
+    <p>$<%= @next_item.price %> AUD</p>
+  <% end %>
+  </div>
 
-<%= render 'history' %>
-<p>Filter by colour:</p>
-<!-- checks if it is for "all" or "category" -->
+  <%= render 'history' %>
+  <p>Filter by colour:</p>
+
+  <!-- checks if it is for "all" or "category" -->
   <% if params["category_1"] == nil %>
     <%= render '/items/color_all' %>
   <% else %>
     <%= render '/items/category/color' %>
   <% end %>
+</div> <!-- ends container -->
+
 
 <script>
   var swingIt = function(){
