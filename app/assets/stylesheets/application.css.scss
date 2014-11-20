@@ -99,6 +99,7 @@ html {
 
 .nav a {
   color: black;
+  font-size: 1.3em;
 }
 
 @media screen and (max-width: 600px) {
@@ -175,4 +176,21 @@ html {
   font-style: italic;
 }
 
+.select-category {
+  width: 100%;
 
+}
+
+#category-button {
+  width: 100%;
+  margin: 0;
+  padding: 0.1em;
+  font-size: 2em;
+  background-color: black;
+  color: white;
+  font-family: 'Lato', sans-serif;
+}
+
+#category-button:hover {
+  background-color: rgb(75,75,75)
+}
