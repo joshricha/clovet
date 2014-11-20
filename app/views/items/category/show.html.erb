@@ -1,5 +1,9 @@
 <div class="container">
 
+<div class="show-page-controls">
+  <%= render '/items/category/history' %>
+</div>
+
   <div id="viewport">
     <ul class="stack" id="img-source">
       <li class="spades">
@@ -8,31 +12,36 @@
         <% else %>
           <img src="/clovet-logo-sq.jpg" alt="">
         <% end %>
-          <div class="yes"></div>
-          <div class="no"></div>
+          <div class="yes">like</div>
+          <div class="no">dislike</div>
       </li>
     </ul>
   </div>
 
-  <div id="item-details">
+
+<div id="item-details">
   <% if @next_item == nil%>
     <p>No items are matching your search. Please try again.</p>
   <% else %>
-    <p><%= @next_item.name %></p>
-    <p>$<%= @next_item.price %> AUD</p>
+    <%= @next_item.name.split(' - ')[0..1].join(" - ") %>
+     -
+    <%= @next_item.price %> AUD
   <% end %>
-  </div>
+</div>
 
-  <%= render 'history' %>
-  <p>Filter by colour:</p>
 
-  <!-- checks if it is for "all" or "category" -->
-  <% if params["category_1"] == nil %>
+<div class="color-box center">
+  <%= render '/items/category/history_buy' %>
+</div> 
+
+<div class="color-box col-md-3 col-sm-3 col-md-offset-3">
+  <% if params["category_1"] == nil %>  
     <%= render '/items/color_all' %>
   <% else %>
-    <%= render '/items/category/color' %>
+    <%= render '/items/category/color' %>     
   <% end %>
-</div> <!-- ends container -->
+</div>   
+
 
 
 <script>

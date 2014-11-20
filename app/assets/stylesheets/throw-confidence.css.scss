@@ -5,10 +5,14 @@
   right: 0;
   bottom: 0;
   background: #f00;
-  opacity: 0; }
+  opacity: 0; 
+}
 
 .no {
-  background: black; }
+  background: #ff0000; 
+  text: "no";
+}
 
 .yes {
-  background: #a4d6b2; }
+  background: #07ff87; 
+}

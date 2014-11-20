@@ -1,3 +1,4 @@
+
 <% if @next_item != nil %>
 	<%= form_tag create_history_path, :method => 'post', :id => "liked" do %>
 	<%= hidden_field_tag 'item_id', @next_item.id %>
@@ -7,7 +8,8 @@
 	<%= hidden_field_tag 'color', params[:color] %>
 	<%= hidden_field_tag 'gender', params[:gender] %>
 	<%= hidden_field_tag 'category_1', params[:category_1] %>
-	<%= submit_tag 'liked' %>
+	<%= submit_tag 'Like', :id =>"liked" %>
+
 	<% end %>
 
 
@@ -19,14 +21,8 @@
 	<%= hidden_field_tag 'color', params[:color] %>
 	<%= hidden_field_tag 'gender', params[:gender] %>
 	<%= hidden_field_tag 'category_1', params[:category_1] %>
-	<%= submit_tag 'disliked' %>
+	<%= submit_tag 'Dislike', :id =>"disliked"  %>
+
 	<% end %>
 
-	<%= form_tag('/create_history', :method => 'post') do %>
-	<%= hidden_field_tag 'item_id', @next_item.id %>
-	<%= hidden_field_tag 'liked', 'true'  %>
-	<%= hidden_field_tag 'clicked_through', 'true'  %>
-	<%= hidden_field_tag 'next_item', @next_item.id  %>
-	<%= submit_tag 'buy' %>
-	<% end %>
 <% end %>

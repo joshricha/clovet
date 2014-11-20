@@ -15,13 +15,19 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       
       <ul class="nav navbar-nav navbar-right">
-  
+        <% if !logged_in? %>
+          <li><a href="/login">Log In</a></li>9
+        <% end %>
+        <% if !logged_in? %>
+          <li><a href="/sign_up">Sign Up</a></li>
+        <% end %>
+
         <% if logged_in? %>
-          <li><a href="/user/wishlist"><i class="fa fa-th-list"></i> wishlist</a></li>
+          <li><a href="/user/wishlist"><i class="fa fa-th-list"></i> Wishlist</a></li>
         <% end %>
         
         <% if logged_in? %>
-          <li class="right"><%= link_to 'logout', login_path, :method => :delete, :data => { :confirm => 'Log out?' } %></li>
+          <li class="right"><%= link_to 'Logout', login_path, :method => :delete, :data => { :confirm => 'Log out?' } %></li>
         <% end %>          
       
       </ul>

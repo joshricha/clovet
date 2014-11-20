@@ -18,15 +18,10 @@
   <%= render '/layouts/navbar' %>
 
 
-    <div class="yield">
+
       <%= yield %>
 
-      <% if logged_in? %>
-        <li><%= link_to 'logout', login_path, :method => :delete, :data => { :confirm => 'Log out?' } %></li>
-      <% end %>
-    </div>
-
-
-
+  <%= render '/layouts/footer' %>
+>>>>>>> 942aff7a2989d1220783138f8949ad5d611f05d1
 </body>
 </html>

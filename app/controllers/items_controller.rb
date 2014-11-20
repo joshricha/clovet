@@ -1,5 +1,7 @@
 class ItemsController < ApplicationController
 
+  before_action :authenticate, :except => [:index] 
+
   def index
     @items = Item.all
 
@@ -12,6 +14,7 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
 
     @next_item = next_item
+
      # refreshes item if a color is clicked
     @item = next_item if params[:color]
 
