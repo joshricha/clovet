@@ -1,60 +1,66 @@
-<!-- captures and sends color value to show as filter -->
-<%= form_tag "/items/category/#{params[:gender]}/#{params[:category_1]}/view", :method => 'get', :class => "color_btn" do %>
-<%= hidden_field_tag 'category_1', params[:category_1] %>
-<button>all</button>
-<% end %>
+    <!-- captures and sends color value to show as filter -->
+<div class="container">
+  <div class="btn_colors center">
 
-<%= form_tag "/items/category/#{params[:gender]}/#{params[:category_1]}/view", :method => 'get', :class => "color_btn" do %>
-<%= hidden_field_tag 'color', 'Black' %>
-<button>black</button>
-<% end %>
+    <%= form_tag "/items/category/#{params[:gender]}/#{params[:category_1]}/view", :method => 'get', :class => "color_btn" do %>
+    <%= hidden_field_tag 'category_1', params[:category_1] %>
+    <button class="btn_all center">all</button>
+    <% end %>
 
-<%= form_tag "/items/category/#{params[:gender]}/#{params[:category_1]}/view", :method => 'get', :class => "color_btn" do %>
-<%= hidden_field_tag 'color', 'White'  %>
-<button>white</button>
-<% end %>
+    <%= form_tag "/items/category/#{params[:gender]}/#{params[:category_1]}/view", :method => 'get', :class => "color_btn" do %>
+    <%= hidden_field_tag 'color', 'Black' %>
+    <button class="btn_black">black</button>
+    <% end %>
 
-<%= form_tag "/items/category/#{params[:gender]}/#{params[:category_1]}/view", :method => 'get', :class => "color_btn" do %>
-<%= hidden_field_tag 'color', 'Grey' %>
-<button>grey</button>
-<% end %>
+    <%= form_tag "/items/category/#{params[:gender]}/#{params[:category_1]}/view", :method => 'get', :class => "color_btn" do %>
+    <%= hidden_field_tag 'color', 'White'  %>
+    <button class="btn_white">white</button>
+    <% end %>
 
-<%= form_tag "/items/category/#{params[:gender]}/#{params[:category_1]}/view", :method => 'get', :class => "color_btn" do %>
-<%= hidden_field_tag 'color', 'Pink' %>
-<button>pink</button>
-<% end %>
+    <%= form_tag "/items/category/#{params[:gender]}/#{params[:category_1]}/view", :method => 'get', :class => "color_btn" do %>
+    <%= hidden_field_tag 'color', 'Grey' %>
+    <button class="btn_grey">grey</button>
+    <% end %>
 
-<%= form_tag "/items/category/#{params[:gender]}/#{params[:category_1]}/view", :method => 'get', :class => "color_btn" do %>
-<%= hidden_field_tag 'color', 'Red' %>
-<button>red</button>
-<% end %>
+    <%= form_tag "/items/category/#{params[:gender]}/#{params[:category_1]}/view", :method => 'get', :class => "color_btn" do %>
+    <%= hidden_field_tag 'color', 'Pink' %>
+    <button class="btn_pink">pink</button>
+    <% end %>
 
-<%= form_tag "/items/category/#{params[:gender]}/#{params[:category_1]}/view", :method => 'get', :class => "color_btn" do %>
-<%= hidden_field_tag 'color', 'Orange' %>
-<button>orange</button>
-<% end %>
+    <%= form_tag "/items/category/#{params[:gender]}/#{params[:category_1]}/view", :method => 'get', :class => "color_btn" do %>
+    <%= hidden_field_tag 'color', 'Red' %>
+    <button class="btn_red">red</button>
+    <% end %>
 
-<%= form_tag "/items/category/#{params[:gender]}/#{params[:category_1]}/view", :method => 'get', :class => "color_btn" do %>
-<%= hidden_field_tag 'color', 'Blue' %>
-<button>blue</button>
-<% end %>
+    <%= form_tag "/items/category/#{params[:gender]}/#{params[:category_1]}/view", :method => 'get', :class => "color_btn" do %>
+    <%= hidden_field_tag 'color', 'Orange' %>
+    <button class="btn_orange">orange</button>
+    <% end %>
 
-<%= form_tag "/items/category/#{params[:gender]}/#{params[:category_1]}/view", :method => 'get', :class => "color_btn" do %>
-<%= hidden_field_tag 'color', 'Navy' %>
-<button>navy</button>
-<% end %>
+    <%= form_tag "/items/category/#{params[:gender]}/#{params[:category_1]}/view", :method => 'get', :class => "color_btn" do %>
+    <%= hidden_field_tag 'color', 'Blue' %>
+    <button class="btn_blue">blue</button>
+    <% end %>
 
-<%= form_tag "/items/category/#{params[:gender]}/#{params[:category_1]}/view", :method => 'get', :class => "color_btn" do %>
-<%= hidden_field_tag 'color', 'Brown' %>
-<button>brown</button>
-<% end %>
+    <%= form_tag "/items/category/#{params[:gender]}/#{params[:category_1]}/view", :method => 'get', :class => "color_btn" do %>
+    <%= hidden_field_tag 'color', 'Navy' %>
+    <button class="btn_navy">navy</button>
+    <% end %>
 
-<%= form_tag "/items/category/#{params[:gender]}/#{params[:category_1]}/view", :method => 'get', :class => "color_btn" do %>
-<%= hidden_field_tag 'color', 'Gold' %>
-<button>gold</button>
-<% end %>
+    <%= form_tag "/items/category/#{params[:gender]}/#{params[:category_1]}/view", :method => 'get', :class => "color_btn" do %>
+    <%= hidden_field_tag 'color', 'Brown' %>
+    <button class="btn_brown">brown</button>
+    <% end %>
 
-<%= form_tag "/items/category/#{params[:gender]}/#{params[:category_1]}/view", :method => 'get', :class => "color_btn" do %>
-<%= hidden_field_tag 'color', 'Nude' %>
-<button>nude</button>
-<% end %>
+    <%= form_tag "/items/category/#{params[:gender]}/#{params[:category_1]}/view", :method => 'get', :class => "color_btn" do %>
+    <%= hidden_field_tag 'color', 'Gold' %>
+    <button class="btn_gold">gold</button>
+    <% end %>
+
+    <%= form_tag "/items/category/#{params[:gender]}/#{params[:category_1]}/view", :method => 'get', :class => "color_btn" do %>
+    <%= hidden_field_tag 'color', 'Nude' %>
+    <button class="btn_nude">nude</button>
+    <% end %>
+
+  </div> 
+</div>   
