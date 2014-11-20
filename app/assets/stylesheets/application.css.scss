@@ -96,6 +96,28 @@ html {
   text-align: center;
 }
 
+
+/*----- item show page -----*/
+
+#liked {
+  float: right;
+  background: none;
+  font-family: 'Prata', serif;
+}
+
+#disliked {
+  float: left;
+  background: none;
+  font-family: 'Prata', serif;
+}
+
+#item-details {
+  font-family: 'Lato', sans-serif;
+}
+
+
+
+
 @media screen and (max-width: 600px) {
   .select-gender {
     background-image: url('http://i.imgur.com/uQipJkN.jpg?1');
@@ -203,3 +225,13 @@ html {
 #category-button:hover {
   background-color: rgb(75,75,75)
 }
+
+
+
+
+
+
+
+
+
+

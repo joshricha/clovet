@@ -1,6 +1,6 @@
 <div class="container">
 
-<div class="show-page-">
+<div class="show-page-controls">
   <%= render '/items/category/history' %>
 </div>
 
@@ -23,8 +23,9 @@
 <% if @next_item == nil%>
   <p>No items are matching your search. Please try again.</p>
 <% else %>
-  <p><%= @next_item.name %></p>
-  <p>$<%= @next_item.price %> AUD</p>
+  <%= @next_item.name.split(' - ')[0..1].join(" - ") %>
+  -
+  <%= @next_item.price %> AUD
 <% end %>
 </div>
 
