@@ -1,10 +1,4 @@
-<%= link_to "Home", root_path %>
-
 <div class="select-category">
-
-  <h1><%= @name %></h1>
-  <%= request.referer %>
-
   <% if @cat1 %>
     <a href="/items/category/<%= "#{@name}" %>/<%= "#{(@cat1.downcase)}/view" %>"><button type="button" class="btn btn-default" id="category-button">View All <%= @cat1 %> <i class="fa fa-caret-right"></i></button></a>
   <% else %>
