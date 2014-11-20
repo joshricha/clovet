@@ -1,15 +1,18 @@
-<h1>Item details</h1>
-<img src=<%=@item.image_url400  %> >
-<p><%= @item.name  %></p>
-<p>$<%= @item.price  %> AUD</p>
+<div class="show-item">
+  <img src=<%=@item.image_url400  %> >
+  <p><%= @item.name  %></p>
+  <p>Label: <%= @item.brand %></p>
+  <p>$<%= @item.price  %> AUD</p>
+  <p>Color: <%= @item.color %></p>
 
 
-<%= form_tag('/edit_history', :method => 'post', :target => "_blank") do %>
-<%= hidden_field_tag 'item_id', @item.id %>
-<%= hidden_field_tag 'liked', 'true'  %>
-<%= hidden_field_tag 'clicked_through', 'true'  %>
-<%= submit_tag 'buy' %>
-<% end %>
+  <%= form_tag('/edit_history', :method => 'post', :target => "_blank") do %>
+    <%= hidden_field_tag 'item_id', @item.id %>
+    <%= hidden_field_tag 'liked', 'true'  %>
+    <%= hidden_field_tag 'clicked_through', 'true'  %>
+    <%= submit_tag 'Buy', :class => "btn btn-default", :id => "show-page-btn" %>
+  <% end %>
 
-<p><%= link_to 'delete from wishlist', delete_from_wishlist_path(:item_id => @item.id) %></p>
-<p><%= link_to 'back to wishlist', user_wishlist_path(:item_id => @item.id) %></p>
+  <%= link_to 'Delete from wishlist', delete_from_wishlist_path(:item_id => @item.id), :class => "btn btn-default", :id => "show-page-btn" %>
+  <%= link_to 'Back to wishlist', user_wishlist_path(:item_id => @item.id), :class => "btn btn-default", :id => "show-page-btn" %>
+</div>
