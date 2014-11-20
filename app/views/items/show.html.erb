@@ -30,8 +30,8 @@
 var swingIt = function(){
 
   var config = {
-    minThrowOutDistance: 1000,
-    maxThrowOutDistance: 2200,
+    minThrowOutDistance: 2000,
+    maxThrowOutDistance: 3000,
     throwOutConfidence: function (offset, element) {
       return Math.min( Math.abs(offset * 4) / element.offsetWidth, 1);
     }
