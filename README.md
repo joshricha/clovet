@@ -7,10 +7,10 @@
 <h3>Models</h3>
 <p>The app uses four models:</p>
 <ul>
-	<li>User - has many: histories</li>
-	<li>Item - belongs to: category</li>
+	<li>User</li>
+	<li>Item</li>
 	<li>Category</li>
-	<li>History - belongs to: item</li>
+	<li>History</li>
 </ul>
 
 <img src="/public/clovet-models.jpg">
