@@ -36,8 +36,15 @@ class ItemsController < ApplicationController
     new_history.clicked_through = params['clicked_through']
     new_history.save
 
+# if category_1 is nil, route leads to "view all *gender*"
+    if params['category_1'] == ""
+      next_item_path = "/items/category/#{params[:gender]}/all"
+    # if category_1 has a value, route leads to "View *gender* *category*"
+    else
+      next_item_path = "/items/category/#{params[:gender]}/#{params[:category_1]}/view?&color=#{params[:color]}"
+    end
     # gets rid of the spaces on the url
-    next_item_path = URI.encode("/items/category/#{params[:gender]}/#{params[:category_1]}/view?&color=#{params[:color]}")
+    next_item_path = URI.encode(next_item_path)
     # redirect to a url that contains gender and cat1
     redirect_to next_item_path
 
@@ -118,6 +125,8 @@ class ItemsController < ApplicationController
     @gender_old = params[:gender]
     @gender = convert_top_level_name(@gender_old)
     @cat1 = params[:category_1]
+
+    # MAYBE check if they are male or female, then show all descendants from there
 
     @children = Category.find_by(name: @gender).descendants.find_by(name: @cat1).children
 
