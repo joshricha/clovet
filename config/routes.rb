@@ -17,8 +17,9 @@ Rails.application.routes.draw do
 
   get '/items/category/:gender' => 'items#top_category'
 
+
+  get '/items/category/:gender/:category_1/view' => 'items#category_1_view'
   get '/items/category/:gender/all' => 'items#category_all'
-  get '/items/category/:gender/:category_1/view' => 'items#category_1_view', :as => 'cat1_view'
   get '/items/category/:gender/:category_1' => 'items#category_1'
 
 
