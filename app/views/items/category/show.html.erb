@@ -1,5 +1,9 @@
 <div class="container">
 
+<div class="show-page-">
+  <%= render '/items/category/history' %>
+</div>
+
   <div id="viewport">
     <ul class="stack" id="img-source">
       <li class="spades">
@@ -14,25 +18,29 @@
     </ul>
   </div>
 
-  <div id="item-details">
-  <% if @next_item == nil%>
-    <p>No items are matching your search. Please try again.</p>
-  <% else %>
-    <p><%= @next_item.name %></p>
-    <p>$<%= @next_item.price %> AUD</p>
-  <% end %>
-  </div>
 
-  <%= render 'history' %>
+<div id="item-details">
+<% if @next_item == nil%>
+  <p>No items are matching your search. Please try again.</p>
+<% else %>
+  <p><%= @next_item.name %></p>
+  <p>$<%= @next_item.price %> AUD</p>
+<% end %>
+</div>
+
+
+<div id="show-page-buy">
+  <%= render '/items/category/history_buy' %>
+</div>
+<div id="show-page-filter">
   <p>Filter by colour:</p>
-
   <!-- checks if it is for "all" or "category" -->
-  <% if params["category_1"] == nil %>
-    <%= render '/items/color_all' %>
-  <% else %>
-    <%= render '/items/category/color' %>
-  <% end %>
-</div> <!-- ends container -->
+    <% if params["category_1"] == nil %>
+      <%= render '/items/color_all' %>
+    <% else %>
+      <%= render '/items/category/color' %>
+    <% end %>
+</div>
 
 
 <script>
