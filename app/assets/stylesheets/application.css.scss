@@ -78,7 +78,9 @@ html {
   display: inline-block;
   text-align: center;
 }
-
+.colors {
+  margin-left: 100px;
+}
 .color_btn {
   display: inline-block;
 }
@@ -127,7 +129,7 @@ html {
 }
 .btn_grey {
   color: #e8e8e8;
-  background-color: #777;
+  background-color: #b5b5b5;
   width: 50px;
   height: 50px;
   padding: 5px;
@@ -140,7 +142,7 @@ html {
 }
 .btn_pink {
   color: #e8e8e8;
-  background-color: pink;
+  background-color: #f49cc8;
   width: 50px;
   height: 50px;
   padding: 5px;
@@ -166,7 +168,7 @@ html {
 }
 .btn_orange {
   color: #e8e8e8;
-  background-color: orange;
+  background-color: #ff7b00;
   width: 50px;
   height: 50px;
   padding: 5px;
@@ -179,7 +181,7 @@ html {
 }
 .btn_blue {
   color: #e8e8e8;
-  background-color: blue;
+  background-color: #25aae1;
   width: 50px;
   height: 50px;
   padding: 5px;
@@ -218,7 +220,7 @@ html {
 }
 .btn_gold {
   color: #e8e8e8;
-  background-color: gold;
+  background-color: #efcb83;
   width: 50px;
   height: 50px;
   padding: 5px;
@@ -245,7 +247,15 @@ html {
 .btn_colors {
   text-align: center;
 }
-
+.color-box {
+  margin-bottom: 50px;
+}
+.btn-lg {
+  margin-bottom: 10px;
+}
+.show-page-controls {
+  color: white;
+}
 #grey-btn {
   background-color: rgb(200,200,200);
 }
@@ -269,7 +279,7 @@ html {
 
 #item-details {
   text-align: center;
-  font-size: 1.5em;
+  font-size: 1.8em;
   padding: 1em;
 }
 
@@ -294,19 +304,6 @@ html {
   margin-top: 1em;
 }
 
-#show-page-bottom {
-  width: 40%;
-
-  margin: 1em auto;
-}
-
-
-#show-page-buy {
-  font-family: 'Prata', serif;
-  border: 1px solid #999;
-  background-color: rgb(236, 236, 236);
-  padding: 5px;
-}
 
 #buy-btn {
     background: none;
@@ -361,6 +358,7 @@ html {
   #select-mens {
     width: 14em;
   }
+
 
 
 }
