@@ -5,6 +5,7 @@
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <link href='http://fonts.googleapis.com/css?family=Prata' rel='stylesheet' type='text/css'>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   <script src="http://malsup.github.com/jquery.form.js"></script>
   <meta name="viewport" content="width=device-width", "initial-scale=1">
   <%= csrf_meta_tags %>
@@ -19,7 +20,7 @@
 
     <% if logged_in? %>
     <div class="nav">
-      <li><a href="/user/wishlist">wishlist</a></li>
+      <li><a href="/user/wishlist"><i class="fa fa-th-list"></i> wishlist</a></li>
     </div>
     <% end %>
 

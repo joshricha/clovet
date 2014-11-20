@@ -114,14 +114,24 @@ html {
   }
 
   .select-buttons-div {
-  width: 90%;
+  width: 95%;
   margin: 0 auto;
-  padding-top: 15em;
+  padding-top: 10em;
   }
 
+  .select-button {
+  background-color: black;
+  text-align: center;
+  padding-top: 0.5em;
+  width: 16em;
+  }
+
+  #select-mens {
+    width: 14em;
+  }
 }
 
-@media screen and (min-width: 300px) {
+@media screen and (min-width: 600px) {
     .select-gender {
     background-image: url('http://i.imgur.com/uQipJkN.jpg?1');
     width: 15em;
@@ -131,13 +141,19 @@ html {
     background-position: center top;
     text-align: center;
   }
-}
 
-.select-button {
+  .select-buttons-div {
+  width: 50em;
+  margin: 0 auto;
+  padding-top: 22em;
+  }
+
+  .select-button {
   background-color: black;
   text-align: center;
   padding-top: 0.5em;
-  width: 60%;
+  width: 20em;
+  }
 }
 
 .select-button a {
