@@ -145,9 +145,8 @@ class ItemsController < ApplicationController
 
     @item = @items.sample
 
-    # CHANGE @items.sample TO NEXT ITEM!!!!!!!!!!!
-    @next_item = @items.sample
-    
+    @next_item = next_item
+
     render '/items/category/show.html.erb'
   end
 
@@ -160,12 +159,14 @@ class ItemsController < ApplicationController
     case @category || @gender
       when 'womens'
         @category == 'womens'
-        @items = Item.all.where(:gender => "female")
-        @items += Item.all.where(:gender => "unisex")
+
+        @items = Item.where('gender=? OR gender=?', 'female', 'unisex')
+        # @items = Item.where(:gender => "female")
+        # @items += Item.where(:gender => "unisex")
         @item = @items.sample
       when 'mens'
-        @items = Item.all.where(:gender => "male")
-        @items += Item.all.where(:gender => "unisex")
+        @items = Item.where(:gender => "male")
+        @items += Item.where(:gender => "unisex")
         @item = @items.sample
     end
 
@@ -190,17 +191,16 @@ class ItemsController < ApplicationController
 # Determines what will be shown next
 
     # if a first-time user (no history yet)
-    
     if @user.histories.count < 20
-      if @color == nil
-        @next_item = @items.where(:id => rand(1000)).first
-      else #there's a color params (whether "" or color)
-          if @color == ""
-            @next_item = @items.where(:id => rand(1000)).first
-          else
-            @next_item = @items.where(:id => rand(1000), :color => params['color']).first  
-          end
 
+        if @color == nil
+          @next_item = @items.sample
+        else #there's a color params (whether "" or color)
+            if @color == ""
+              @next_item = @items.sample
+            else
+              @next_item = @items.where(:color => params['color']).sample
+            end
       end
 
 
@@ -210,7 +210,7 @@ class ItemsController < ApplicationController
       liked_items = @user.histories.where(:liked => true)
 
       brands_liked = liked_items.each_with_object(Hash.new(0)) { |item,counts| counts[item.item.brand] += 1 }
-      
+
 
       counts = []
       # gets all the item counts and adds to 'counts' array
@@ -228,7 +228,7 @@ class ItemsController < ApplicationController
 
       #makes an array of the brand or category that has the highest counts
       fave_brands = brands_liked.map{|item, count| item if highest_counts.include?count }.compact
-    
+
 
 
       # if there's a color selected
