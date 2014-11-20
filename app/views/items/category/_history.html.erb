@@ -1,3 +1,4 @@
+
 <% if @next_item != nil %>
 	<%= form_tag create_history_path, :method => 'post', :id => "liked" do %>
 	<%= hidden_field_tag 'item_id', @next_item.id %>
@@ -22,11 +23,4 @@
 	<%= submit_tag 'disliked' %>
 	<% end %>
 
-	<%= form_tag('/create_history', :method => 'post') do %>
-	<%= hidden_field_tag 'item_id', @next_item.id %>
-	<%= hidden_field_tag 'liked', 'true'  %>
-	<%= hidden_field_tag 'clicked_through', 'true'  %>
-	<%= hidden_field_tag 'next_item', @next_item.id  %>
-	<%= submit_tag 'buy' %>
-	<% end %>
 <% end %>

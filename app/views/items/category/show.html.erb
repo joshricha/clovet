@@ -1,5 +1,9 @@
 <%= link_to "Home", root_path %>
 
+<div class="show-page-">
+  <%= render '/items/category/history' %>
+</div>
+
   <div id="viewport">
     <ul class="stack" id="img-source">
       <li class="spades">
@@ -23,14 +27,19 @@
 <% end %>
 </div>
 
-<%= render 'history' %>
-<p>Filter by colour:</p>
-<!-- checks if it is for "all" or "category" -->
-  <% if params["category_1"] == nil %>
-    <%= render '/items/color_all' %>
-  <% else %>
-    <%= render '/items/category/color' %>
-  <% end %>
+
+<div id="show-page-buy">
+  <%= render '/items/category/history_buy' %>
+</div>
+<div id="show-page-filter">
+  <p>Filter by colour:</p>
+  <!-- checks if it is for "all" or "category" -->
+    <% if params["category_1"] == nil %>
+      <%= render '/items/color_all' %>
+    <% else %>
+      <%= render '/items/category/color' %>
+    <% end %>
+</div>
 
 <script>
   var swingIt = function(){
