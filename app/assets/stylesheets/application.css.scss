@@ -16,6 +16,7 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import url(http://fonts.googleapis.com/css?family=Dancing+Script);
 
 html {
   width: 100%;
@@ -256,6 +257,18 @@ html {
 .show-page-controls {
   color: white;
 }
+#select-mens a {
+  text-decoration: none;
+}
+#select-mens a:hover {
+  color: #999;
+}
+#select-womens a {
+  text-decoration: none;
+}
+#select-womens a:hover {
+  color: #999;
+}
 #grey-btn {
   background-color: rgb(200,200,200);
 }
@@ -442,6 +455,34 @@ html {
   background-color: rgb(75,75,75)
 }
 
+div.container {
+  margin: 0 auto;
+  }
+
+li.wishlist {
+  list-style: none;
+  border: 1px solid #dfdfdf;
+  margin-top: 1em;
+}
+
+h1.handwritting {
+  text-align: center;
+  font-family: 'Dancing Script', cursive;
+}
+
+.wishlist a  {
+  font-family: 'Prata', serif;
+  color: #000;
+}
+
+
+.navbar-inverse .navbar-brand {
+  color: #fff;
+}
+
+.navbar-inverse .navbar-brand:hover {
+  color: #999;
+}
 
 @media screen and (max-width: 320px) {
   .navbar-header {
@@ -450,9 +491,18 @@ html {
 }
 
 
+.navbar-inverse .navbar-nav > li > a {
+  color: #fff;
+  font-family: 'Lato', sans-serif;
+}
+.navbar-inverse .navbar-nav > li > a:hover {
+  color: #999;
+}
 
-
-
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
 
 
 
