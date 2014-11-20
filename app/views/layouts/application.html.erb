@@ -14,24 +14,15 @@
 
 
 <body>
-  <div class="brand-bar">
-      <p>CLOVET</p>
-  </div>
+  
+  <%= render '/layouts/navbar' %>
+
+<!--   <div class="container"> -->
+
+  
+      <%= yield %>
 
 
-    <% if logged_in? %>
-    <div class="nav">
-      <li><a href="/user/wishlist"><i class="fa fa-th-list"></i> wishlist</a></li>
-    </div>
-    <% end %>
-
-
-  <div class="yield">
-    <%= yield %>
-
-    <% if logged_in? %>
-      <li><%= link_to 'logout', login_path, :method => :delete, :data => { :confirm => 'Log out?' } %></li>
-    <% end %>
-  </div>
+ <!--  </div> -->  <!-- ends container -->
 </body>
 </html>

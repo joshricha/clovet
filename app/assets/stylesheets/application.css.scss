@@ -17,47 +17,15 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-#liked_submit {
-	display: none;
-}
-
-#disliked_submit {
-	display: none;
-}
-
-#buy_submit {
-	margin: 0 auto;
-	display: block;
-}
-
-#item-details {
-	text-align: center;
-}
 html {
   width: 100%;
 }
 
-.yield {
-  padding-top: 6.5em;
-
+.right {
+  text-align: right;
 }
-
-.brand-bar {
-  background-color: black;
-  color: white;
-  width: 100%;
-  height: 4em;
-  margin-top: 0;
-  position: fixed;
-  display: block;
-}
-
-.brand-bar p {
-  text-align: center;
-  font-family: 'Prata', serif;
-  font-size: 2em;
-  padding-top: 0.4em;
-
+.left {
+  text-align: left;
 }
 
 .login-container {
@@ -78,6 +46,23 @@ html {
   margin: 0.5em auto;
 }
 
+/*----- navbar -----*/
+.dropdown-menu > li > a {
+  text-align: right;
+}
+.navbar-collapse > ul > li > a {
+  text-align: right;
+}
+.navbar-toggle {
+  text-align: right;
+}
+.navbar-brand {
+  font-family: 'Prata', serif;
+  font-size: 2em;
+  color: white;
+}
+/*----- navbar -----*/
+
 #grey-btn {
   background-color: rgb(200,200,200);
 }
@@ -86,20 +71,21 @@ html {
   background-color: rgb(150,150,150);
 }
 
-.nav {
-  height: 2.5em;
-  text-align: right;
-  font-family: 'Prata', serif;
-  color: black;
-  position: fixed;
-  margin-top: 4em;
-  background-color:white;
-  width: 100%;
+#liked_submit {
+  display: none;
 }
 
-.nav a {
-  color: black;
-  font-size: 1.3em;
+#disliked_submit {
+  display: none;
+}
+
+#buy_submit {
+  margin: 0 auto;
+  display: block;
+}
+
+#item-details {
+  text-align: center;
 }
 
 @media screen and (max-width: 600px) {
@@ -112,6 +98,7 @@ html {
     padding-bottom: 157%;
     height: 0;
     text-align: center;
+    position: fixed;
   }
 
   .select-buttons-div {
@@ -176,10 +163,24 @@ html {
   font-style: italic;
 }
 
-.select-category {
-  width: 100%;
+@media screen and (max-width: 600px) {
+  .select-category {
+    width: 100%;
 
+  }
 }
+
+@media screen and (min-width: 600px) {
+  .select-category {
+    width: 25em;
+    margin: 100px auto;
+  }
+
+  .select-category li {
+    list-style-type: none;
+  }
+}
+
 
 #category-button {
   width: 100%;
@@ -190,7 +191,6 @@ html {
   color: white;
   font-family: 'Lato', sans-serif;
 }
-
 #category-button:hover {
   background-color: rgb(75,75,75)
 }
