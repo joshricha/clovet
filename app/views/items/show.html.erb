@@ -30,7 +30,13 @@
 var swingIt = function(){
 
   var config = {
-    minThrowOutDistance: 1000
+
+    minThrowOutDistance: 1000,
+    maxThrowOutDistance: 2000,
+    throwOutConfidence: function (offset, element) {
+      return Math.min( Math.abs(offset * 4) / element.offsetWidth, 1);
+
+    }
   }
 
   var stack = gajus.Swing.Stack(config),
@@ -40,7 +46,7 @@ var swingIt = function(){
       throwOutConfidenceElements = {};
 
   window.card = stack.createCard(cardElement);
-
+// debugger;
   stack.on('dragstart', function (e) {
       throwOutConfidenceElements.yes = e.target.querySelector('.yes').style;
       throwOutConfidenceElements.no  = e.target.querySelector('.no').style;

@@ -3960,6 +3960,8 @@ Card.config = function (config) {
 
     config.transform = config.transform ? config.transform : Card.transform;
 
+    // console.log(config.throwOutConfidence)
+
     return config;
 };
 
