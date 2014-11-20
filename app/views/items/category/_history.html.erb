@@ -3,6 +3,7 @@
 <%= hidden_field_tag 'liked', 'true'  %>
 <%= hidden_field_tag 'clicked_through', 'false'  %>
 <%= hidden_field_tag 'next_item', @next_item.id  %>
+<%= hidden_field_tag 'color', params[:color] %>
 <%= hidden_field_tag 'gender', params[:gender] %>
 <%= hidden_field_tag 'category_1', params[:category_1] %>
 <%= submit_tag 'liked' %>
@@ -14,6 +15,7 @@
 <%= hidden_field_tag 'liked', 'false'  %>
 <%= hidden_field_tag 'clicked_through', 'false'  %>
 <%= hidden_field_tag 'next_item', @next_item.id  %>
+<%= hidden_field_tag 'color', params[:color] %>
 <%= hidden_field_tag 'gender', params[:gender] %>
 <%= hidden_field_tag 'category_1', params[:category_1] %>
 <%= submit_tag 'disliked' %>
