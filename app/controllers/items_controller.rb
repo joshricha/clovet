@@ -36,7 +36,10 @@ class ItemsController < ApplicationController
     new_history.clicked_through = params['clicked_through']
     new_history.save
 
-    redirect_to item_path(params['next_item'], :color => params[:color])
+    # gets rid of the spaces on the url
+    next_item_path = URI.encode("/items/category/#{params[:gender]}/#{params[:category_1]}/view?&color=#{params[:color]}")
+    # redirect to a url that contains gender and cat1
+    redirect_to next_item_path
 
   end
 
@@ -118,30 +121,29 @@ class ItemsController < ApplicationController
 
     @children = Category.find_by(name: @gender).descendants.find_by(name: @cat1).children
 
-
-
-    # @children = Category.find_by(name: @gender).children
-    # @children = Category.find_by(name: @gender).descendants.where(name: @cat1).first.descendants
-    # @children = Category.find(id).children
-    # Category.find_by(name: @gender).children
-
     render '/items/category/index.html.erb'
   end
 
   def category_1_view
+
     gender_old = params[:gender]
     @gender = convert_top_level_name(gender_old)
     @user = current_user
+    @color = params['color']
 
-    # finds the items of the category you are looking for. Little SQL magic
-    @items = Category.find_by(name: @gender).descendants.where("lower(name) = ?", params[:category_1]).first.items
+    @items_cat = Category.find_by(name: @gender).descendants.where("lower(name) = ?", params[:category_1])
 
-    @user.histories
+    # gets the original category id to include with all descending ids
+    item_id = @items_cat.first.id
+    cat_ids = Category.find(@items_cat.first.id).descendants.pluck(:id)
+    cat_ids << item_id
 
-    @item = @items.sample
+    @items = Item.where(category_id: cat_ids)
 
-    @next_item = @items.sample
-    # @next_item = Item.where(:id => rand(1000)).first
+    # takes only items that are not in the user's history, and NO perfumes
+    @items = @items.where.not(:id => @user.histories.pluck(:item_id), :category_id => 148)
+
+    @next_item = next_item
 
     render '/items/category/show.html.erb'
   end
@@ -155,12 +157,12 @@ class ItemsController < ApplicationController
     case @category || @gender
       when 'womens'
         @category == 'womens'
-        @items = Item.all.where(:gender => "female")
-        @items += Item.all.where(:gender => "unisex")
+        @items = Item.where(:gender => "female")
+        @items += Item.where(:gender => "unisex")
         @item = @items.sample
       when 'mens'
-        @items = Item.all.where(:gender => "male")
-        @items += Item.all.where(:gender => "unisex")
+        @items = Item.where(:gender => "male")
+        @items += Item.where(:gender => "unisex")
         @item = @items.sample
     end
 
@@ -173,13 +175,22 @@ class ItemsController < ApplicationController
   private
 
   def next_item
-
-# Determines what will be shown next
+  # Determines what will be shown next
 
     # if a first-time user (no history yet)
-    if @user.histories.count < 20
 
-      @next_item = Item.where(:id => rand(1000)).first
+    if @user.histories.count < 20
+      if @color == nil
+        @next_item = @items.sample
+      else #there's a color params (whether "" or color)
+          if @color == ""
+            @next_item = @items.sample
+          else
+            @next_item = @items.where(:id => rand(1000), :color => params['color']).first
+          end
+
+      end
+
 
     # if user has history record
     else
@@ -187,46 +198,37 @@ class ItemsController < ApplicationController
       liked_items = @user.histories.where(:liked => true)
 
       brands_liked = liked_items.each_with_object(Hash.new(0)) { |item,counts| counts[item.item.brand] += 1 }
-      categories_liked = liked_items.each_with_object(Hash.new(0)) { |item,counts| counts[item.item.category.name] += 1 }
 
-      def get_favourite(list)
-        counts = []
-        # gets all the item counts and adds to 'counts' array
-        list.each do |pair|
-          counts << pair[1]
-        end
-        #finds out the two highest counts from the 'counts' array
-        highest_counts = counts.sort.uniq
 
-        if highest_counts.length > 1
-          highest_counts = highest_counts[-2..-1]
-        else
-          highest_counts
-        end
+      counts = []
+      # gets all the item counts and adds to 'counts' array
+      brands_liked.each do |pair|
+        counts << pair[1]
+      end
+      #finds out the two highest counts from the 'counts' array
+      highest_counts = counts.sort.uniq
 
-        #makes an array of the brand or category that has the highest counts
-        list.map{|item, count| item if highest_counts.include?count }.compact
+      if highest_counts.length > 1
+        highest_counts = highest_counts[-2..-1]
+      else
+        highest_counts
       end
 
-      fave_brands = get_favourite(brands_liked)
-      fave_categories = get_favourite(categories_liked)
-   
-      # selects what item to show next
 
-      # takes only items that are not in the user's history
-      items_not_in_history = Item.where.not(:id => @user.histories.pluck(:item_id), :category_id => 148)
+      #makes an array of the brand or category that has the highest counts
+      fave_brands = brands_liked.map{|item, count| item if highest_counts.include?count }.compact
 
       # if there's a color selected
-      if params['color'] != nil
-        if params['color'] == ""
-          items_not_in_history
+      if @color != nil
+        if @color == ""
+          @items
         else
-          items_not_in_history = items_not_in_history.where(:color => params['color'])
+          @items = @items.where(:color => @color)
         end
       end
 
       # gives two options: 1. three random items, 2. one item from a favourite brand
-      items_to_show = [items_not_in_history.sample, items_not_in_history.sample, items_not_in_history.sample, items_not_in_history.where(brand: fave_brands.sample).sample ]
+      items_to_show = [@items.sample, @items.sample, @items.sample, @items.where(brand: fave_brands.sample).sample ]
 
       #chooses randomly from the 'items_to_show' options
       @sampled = items_to_show.sample

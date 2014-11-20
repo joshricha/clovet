@@ -33,4 +33,146 @@
 #item-details {
 	text-align: center;
 }
+html {
+  width: 100%;
+}
+
+.yield {
+  padding-top: 6.5em;
+
+}
+
+.brand-bar {
+  background-color: black;
+  color: white;
+  width: 100%;
+  height: 4em;
+  margin-top: 0;
+  position: fixed;
+  display: block;
+}
+
+.brand-bar p {
+  text-align: center;
+  font-family: 'Prata', serif;
+  font-size: 2em;
+  padding-top: 0.4em;
+
+}
+
+.login-container {
+  text-align: center;
+  width: 100%;
+  margin-top: 10em;
+  font-family: 'Prata', serif;
+}
+
+.login-form p {
+  font-family: 'Prata', serif;
+  font-style: italic;
+  font-size: 1.5em;
+}
+
+.btn-default {
+  width: 20em;
+  margin: 0.5em auto;
+}
+
+#grey-btn {
+  background-color: rgb(200,200,200);
+}
+
+#grey-btn:hover {
+  background-color: rgb(150,150,150);
+}
+
+.nav {
+  height: 2.5em;
+  text-align: right;
+  font-family: 'Prata', serif;
+  color: black;
+  position: fixed;
+  margin-top: 4em;
+  background-color:white;
+  width: 100%;
+}
+
+.nav a {
+  color: black;
+}
+
+@media screen and (max-width: 600px) {
+  .select-gender {
+    background-image: url('http://i.imgur.com/uQipJkN.jpg?1');
+    width: 100%;
+    background-position: center top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-bottom: 157%;
+    height: 0;
+    text-align: center;
+  }
+
+  .select-buttons-div {
+  width: 95%;
+  margin: 0 auto;
+  padding-top: 10em;
+  }
+
+  .select-button {
+  background-color: black;
+  text-align: center;
+  padding-top: 0.5em;
+  width: 16em;
+  }
+
+  #select-mens {
+    width: 14em;
+  }
+}
+
+@media screen and (min-width: 600px) {
+    .select-gender {
+    background-image: url('http://i.imgur.com/uQipJkN.jpg?1');
+    width: 15em;
+    height: 50em;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center top;
+    text-align: center;
+  }
+
+  .select-buttons-div {
+  width: 50em;
+  margin: 0 auto;
+  padding-top: 22em;
+  }
+
+  .select-button {
+  background-color: black;
+  text-align: center;
+  padding-top: 0.5em;
+  width: 20em;
+  }
+}
+
+.select-button a {
+  color: white;
+  font-family: 'Prata', serif;
+  font-size: 3em;
+}
+
+#select-womens {
+  float: right;
+  margin-top: 1em;
+}
+
+.select-gender h1 {
+  color: white;
+  font-family: 'Prata', serif;
+  font-size: 5em;
+  margin: 0;
+  font-style: italic;
+}
+
 
