@@ -12,6 +12,7 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
 
     @next_item = next_item
+     # refreshes item if a color is clicked
     @item = next_item if params[:color]
 
   end
@@ -36,11 +37,14 @@ class ItemsController < ApplicationController
     new_history.clicked_through = params['clicked_through']
     new_history.save
 
+    # for all gender with color
+    if params['category_1'] == "" && params['color'] != nil
+      next_item_path = "/items/category/#{params[:gender]}/all?&color=#{params[:color]}"
     # if category_1 is nil, route leads to "view all *gender*"
-    if params['category_1'] == ""
+    elsif params['category_1'] == ""
       next_item_path = "/items/category/#{params[:gender]}/all"
     # if category_1 has a value, route leads to "View *gender* *category*"
-    else
+    else params['category_1']
       next_item_path = "/items/category/#{params[:gender]}/#{params[:category_1]}/view?&color=#{params[:color]}"
     end
     # gets rid of the spaces on the url
@@ -126,7 +130,7 @@ class ItemsController < ApplicationController
     @gender = convert_top_level_name(@gender_old)
     @cat1 = params[:category_1]
 
-    @children = Category.find_by(name: @gender).children
+    @children = Category.find_by(name: @gender).descendants.find_by(name: @cat1).children
 
     render '/items/category/index.html.erb'
   end
@@ -144,12 +148,17 @@ class ItemsController < ApplicationController
     item_id = @items_cat.first.id
     cat_ids = Category.find(@items_cat.first.id).descendants.pluck(:id)
     cat_ids << item_id
-
     @items = Item.where(category_id: cat_ids)
-    # takes only items that are not in the user's history, and NO perfumes
+
+    # takes only items that are not in the user's history, and NO perfumes (cat id 148)
     @items = @items.where.not(:id => @user.histories.pluck(:item_id), :category_id => 148)
-    # raise
+
     @next_item = next_item
+
+    # refreshes item if a color is clicked
+    if @color != nil 
+      @next_item = next_item
+    end
 
     render '/items/category/show.html.erb'
   end
@@ -159,6 +168,7 @@ class ItemsController < ApplicationController
 
     @category = params[:category]
     @gender = params[:gender]
+    @color = params[:color]
 
     case @category || @gender
       when 'womens'
@@ -166,13 +176,19 @@ class ItemsController < ApplicationController
         @items = Item.where('gender=? OR gender=?', 'female', 'unisex')
         @item = @items.sample
       when 'mens'
-        @items = Item.where('gender=? OR gender=?', 'mens', 'unisex')
+        @items = Item.where('gender=? OR gender=?', 'male', 'unisex')
         @item = @items.sample
     end
 
     @next_item = next_item
 
+    # refreshes item if a color is clicked
+    if @color != nil 
+      @next_item = next_item
+    end
+
     render '/items/category/show.html.erb'
+
   end
 
 
@@ -219,7 +235,6 @@ class ItemsController < ApplicationController
 
       #makes an array of the brand or category that has the highest counts
       fave_brands = brands_liked.map{|item, count| item if highest_counts.include?count }.compact
-
 
 
       # if there's a color selected

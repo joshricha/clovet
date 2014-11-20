@@ -14,6 +14,7 @@
     </ul>
   </div>
 
+
 <div id="item-details">
 <% if @next_item == nil%>
   <p>No items are matching your search. Please try again.</p>
@@ -27,7 +28,7 @@
 
 <%= render 'history' %>
 <p>Filter by colour:</p>
-<%= render 'color' %>
+<%= render '/items/category/color' %>
 
 <script>
   var swingIt = function(){

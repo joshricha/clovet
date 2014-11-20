@@ -1,6 +1,7 @@
 
 <!-- captures and sends color value to show as filter -->
 <%= form_tag "/items/category/#{params[:gender]}/#{params[:category_1]}/view", :method => 'get', :class => "color_btn" do %>
+<%= hidden_field_tag 'category_1', params[:category_1] %>
 <button>all</button>
 <% end %>
 
