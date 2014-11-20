@@ -139,10 +139,9 @@ class ItemsController < ApplicationController
     cat_ids << item_id
 
     @items = Item.where(category_id: cat_ids)
-
     # takes only items that are not in the user's history, and NO perfumes
     @items = @items.where.not(:id => @user.histories.pluck(:item_id), :category_id => 148)
-
+    # raise
     @next_item = next_item
 
     render '/items/category/show.html.erb'
