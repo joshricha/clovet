@@ -4,5 +4,5 @@
 	<%= hidden_field_tag 'liked', 'true'  %>
 	<%= hidden_field_tag 'clicked_through', 'true'  %>
 	<%= hidden_field_tag 'next_item', @next_item.id  %>
-	<%= submit_tag 'buy' %>
+	<%= submit_tag 'Buy', :id => 'buy-btn'%>
 	<% end %>

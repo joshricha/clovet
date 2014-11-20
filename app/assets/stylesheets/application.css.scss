@@ -136,9 +136,58 @@ html {
 #item-details {
   text-align: center;
 }
-#show-page-buy{
+
+
+
+/*----- item show page -----*/
+
+#liked {
+  float: right;
+  background: none;
+  font-family: 'Prata', serif;
+}
+
+#disliked {
+  float: left;
+  background: none;
+  font-family: 'Prata', serif;
+}
+
+#item-details {
+  font-family: 'Lato', sans-serif;
+}
+
+#show-page-bottom {
+  width: 40%;
+  margin: 0 auto;
+}
+
+#show-page-buy {
+  font-family: 'Prata', serif;
+  border: 1px solid black;
+  background-color: rgb(236, 236, 236);
+}
+
+#buy-btn {
+    background: none;
+    margin: 0 auto;
+    display: block;
+}
+
+#show-page-filter {
+  font-family: 'Prata', serif;
+  border: 1px solid black;
+}
+
+#color-filter-text {
+  border-bottom: 1px solid black;
   text-align: center;
 }
+
+
+
+
+>>>>>>> 2afc8d3d406b256ddf988551cbe380b7ac4a513d
 @media screen and (max-width: 600px) {
   .select-gender {
     background-image: url('http://i.imgur.com/uQipJkN.jpg?1');
@@ -246,3 +295,13 @@ html {
 #category-button:hover {
   background-color: rgb(75,75,75)
 }
+
+
+
+
+
+
+
+
+
+
