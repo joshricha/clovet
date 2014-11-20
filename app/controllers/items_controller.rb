@@ -159,12 +159,14 @@ class ItemsController < ApplicationController
     case @category || @gender
       when 'womens'
         @category == 'womens'
-        @items = Item.all.where(:gender => "female")
-        @items += Item.all.where(:gender => "unisex")
+
+        @items = Item.where('gender=? OR gender=?', 'female', 'unisex')
+        # @items = Item.where(:gender => "female")
+        # @items += Item.where(:gender => "unisex")
         @item = @items.sample
       when 'mens'
-        @items = Item.all.where(:gender => "male")
-        @items += Item.all.where(:gender => "unisex")
+        @items = Item.where(:gender => "male")
+        @items += Item.where(:gender => "unisex")
         @item = @items.sample
     end
 
@@ -191,16 +193,16 @@ class ItemsController < ApplicationController
     # if a first-time user (no history yet)
 
     if @user.histories.count < 20
-      if @color == nil
-        @next_item = @items.where(:id => rand(1000)).first
-      else #there's a color params (whether "" or color)
-          if @color == ""
-            @next_item = @items.where(:id => rand(1000)).first
-          else
-            @next_item = @items.where(:id => rand(1000), :color => params['color']).first
-          end
 
-      end
+        if @color == nil
+          @next_item = @items.sample
+        else #there's a color params (whether "" or color)
+            if @color == ""
+              @next_item = @items.sample
+            else
+              @next_item = @items.where(:color => params['color']).sample
+            end
+        end
 
 
     # if user has history record
