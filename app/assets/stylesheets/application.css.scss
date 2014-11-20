@@ -16,6 +16,7 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import url(http://fonts.googleapis.com/css?family=Dancing+Script);
 
 html {
   width: 100%;
@@ -427,6 +428,7 @@ html {
   }
 }
 
+
 #category-button {
   width: 100%;
   margin: 0;
@@ -436,10 +438,10 @@ html {
   color: white;
   font-family: 'Lato', sans-serif;
 }
+
 #category-button:hover {
   background-color: rgb(75,75,75)
 }
-
 
 div.container {
   margin: 0 auto;
@@ -450,4 +452,33 @@ li.wishlist {
   border: 1px solid #dfdfdf;
   margin-top: 1em;
 }
+
+h1.handwritting {
+  text-align: center;
+  font-family: 'Dancing Script', cursive;
+}
+
+.wishlist a  {
+  font-family: 'Prata', serif;
+  color: #000;
+}
+
+.navbar-inverse .navbar-brand {
+  color: #fff;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+  color: #fff;
+  font-family: 'Lato', sans-serif;
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+
+
+
+
 

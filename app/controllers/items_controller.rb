@@ -40,7 +40,6 @@ class ItemsController < ApplicationController
     new_history.clicked_through = params['clicked_through']
     new_history.save
 
-
     # for all gender with color
     if params['category_1'] == "" && params['color'] != nil
       next_item_path = "/items/category/#{params[:gender]}/all?&color=#{params[:color]}"
@@ -134,8 +133,6 @@ class ItemsController < ApplicationController
     @gender = convert_top_level_name(@gender_old)
     @cat1 = params[:category_1]
 
-    # MAYBE check if they are male or female, then show all descendants from there
-
     @children = Category.find_by(name: @gender).descendants.find_by(name: @cat1).children
 
     render '/items/category/index.html.erb'
@@ -162,7 +159,7 @@ class ItemsController < ApplicationController
     @next_item = next_item
 
     # refreshes item if a color is clicked
-    if @color != nil
+    if @color != nil 
       @next_item = next_item
     end
 
@@ -176,13 +173,11 @@ class ItemsController < ApplicationController
     @gender = params[:gender]
     @color = params[:color]
 
-
-
     case @category || @gender
       when 'womens'
         @category == 'womens'
         @items = Item.where('gender=? OR gender=?', 'female', 'unisex')
-        # @item = @items.sample
+        @item = @items.sample
       when 'mens'
         @items = Item.where('gender=? OR gender=?', 'male', 'unisex')
         @item = @items.sample
@@ -191,7 +186,7 @@ class ItemsController < ApplicationController
     @next_item = next_item
 
     # refreshes item if a color is clicked
-    if @color != nil
+    if @color != nil 
       @next_item = next_item
     end
 
@@ -256,8 +251,6 @@ class ItemsController < ApplicationController
 
       # gives two options: 1. three random items, 2. one item from a favourite brand
       items_to_show = [@items.sample, @items.sample, @items.sample, @items.where(brand: fave_brands.sample).sample ]
-
-
 
       #chooses randomly from the 'items_to_show' options
       @sampled = items_to_show.sample
