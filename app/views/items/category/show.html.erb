@@ -32,8 +32,10 @@
 <div id="show-page-buy">
   <%= render '/items/category/history_buy' %>
 </div>
+
 <div id="show-page-filter">
-  <p>Filter by colour:</p>
+  <p class="center">Filter by colour:</p>
+
   <!-- checks if it is for "all" or "category" -->
     <% if params["category_1"] == nil %>
       <%= render '/items/color_all' %>
