@@ -20,32 +20,32 @@
 
 
 <div id="item-details">
-<% if @next_item == nil%>
-  <p>No items are matching your search. Please try again.</p>
-<% else %>
-  <%= @next_item.name.split(' - ')[0..1].join(" - ") %>
-  -
-  <%= @next_item.price %> AUD
-<% end %>
+  <% if @next_item == nil%>
+    <p>No items are matching your search. Please try again.</p>
+  <% else %>
+    <%= @next_item.name.split(' - ')[0..1].join(" - ") %>
+     -
+    <%= @next_item.price %> AUD
+  <% end %>
 </div>
 
 
 
-<div id="show-page-bottom">
+<!-- <div id="show-page-bottom"> -->
   <div id="show-page-buy">
     <%= render '/items/category/history_buy' %>
   </div>
-  <div id="show-page-filter">
-    <p id="color-filter-text">Filter by Colour:</p>
+<!--   <div id="show-page-filter"> -->
+<!--     <p id="color-filter-text">Filter by Colour:</p> -->
     <!-- checks if it is for "all" or "category" -->
       <% if params["category_1"] == nil %>
         <%= render '/items/color_all' %>
       <% else %>
         <%= render '/items/category/color' %>
       <% end %>
-  </div>
+ <!--  </div> -->
 
-</div>
+<!-- </div> -->
 
 
 <script>

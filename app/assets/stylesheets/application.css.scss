@@ -87,6 +87,7 @@ html {
 
 }
 .btn_all {
+  color: #999;
   width: 50px;
   height: 50px;
   padding: 5px;
@@ -94,7 +95,11 @@ html {
   border-radius: 4px;
   box-shadow: 1px 1px 1px #777;
 }
+.btn_all:hover {
+  box-shadow: 3px 3px 3px #777; 
+}
 .btn_black {
+  color: #e8e8e8;
   background-color: black;
   width: 50px;
   height: 50px;
@@ -103,7 +108,11 @@ html {
   border-radius: 4px;
   box-shadow: 1px 1px 1px #777;
 }
+.btn_black:hover{
+  box-shadow: 3px 3px 3px #777;
+}
 .btn_white {
+  color: #e8e8e8;
   background-color: white;
   width: 50px;
   height: 50px;
@@ -111,9 +120,13 @@ html {
   margin: 5px;
   border-radius: 4px;
   box-shadow: 1px 1px 1px #777;
-  
+}
+
+.btn_white:hover{
+  box-shadow: 5px 5px 5px #777;
 }
 .btn_grey {
+  color: #e8e8e8;
   background-color: #777;
   width: 50px;
   height: 50px;
@@ -122,7 +135,11 @@ html {
   border-radius: 4px;
   box-shadow: 1px 1px 1px #777;
 }
+.btn_grey:hover {
+  box-shadow: 3px 3px 3px #777;
+}
 .btn_pink {
+  color: #e8e8e8;
   background-color: pink;
   width: 50px;
   height: 50px;
@@ -131,7 +148,11 @@ html {
   border-radius: 4px;
   box-shadow: 1px 1px 1px #777;
 }
+.btn_pink:hover {
+  box-shadow: 3px 3px 3px #777;
+}
 .btn_red {
+  color: #e8e8e8;
   background-color: red;
   width: 50px;
   height: 50px;
@@ -140,7 +161,11 @@ html {
   border-radius: 4px;
   box-shadow: 1px 1px 1px #777;
 }
+.btn_red:hover {
+  box-shadow: 3px 3px 3px #777;
+}
 .btn_orange {
+  color: #e8e8e8;
   background-color: orange;
   width: 50px;
   height: 50px;
@@ -149,7 +174,11 @@ html {
   border-radius: 4px;
   box-shadow: 1px 1px 1px #777;
 }
+.btn_orange:hover {
+  box-shadow: 3px 3px 3px #777;
+}
 .btn_blue {
+  color: #e8e8e8;
   background-color: blue;
   width: 50px;
   height: 50px;
@@ -158,7 +187,11 @@ html {
   border-radius: 4px;
   box-shadow: 1px 1px 1px #777;
 }
+.btn_blue:hover{
+  box-shadow: 3px 3px 3px #777;
+}
 .btn_navy {
+  color: #e8e8e8;
   background-color: navy;
   width: 50px;
   height: 50px;
@@ -167,7 +200,11 @@ html {
   border-radius: 4px;
   box-shadow: 1px 1px 1px #777;
 }
+.btn_navy:hover {
+  box-shadow: 3px 3px 3px #777;
+}
 .btn_brown {
+  color: #e8e8e8;
   background-color: brown;
   width: 50px;
   height: 50px;
@@ -176,7 +213,11 @@ html {
   border-radius: 4px;
   box-shadow: 1px 1px 1px #777;
 }
+.btn_brown:hover{
+  box-shadow: 3px 3px 3px #777;
+}
 .btn_gold {
+  color: #e8e8e8;
   background-color: gold;
   width: 50px;
   height: 50px;
@@ -185,13 +226,21 @@ html {
   border-radius: 4px;
   box-shadow: 1px 1px 1px #777;
 }
+.btn_gold:hover {
+  box-shadow: 3px 3px 3px #777;
+}
 .btn_nude {
+  color: #999;
+  background-color: #f7e7cd;
   width: 50px;
   height: 50px;
   padding: 5px;
   margin: 5px;
   border-radius: 4px;
   box-shadow: 1px 1px 1px #777;
+}
+.btn_nude:hover {
+  box-shadow: 3px 3px 3px #777;
 }
 .btn_colors {
   text-align: center;
@@ -220,6 +269,8 @@ html {
 
 #item-details {
   text-align: center;
+  font-size: 1.5em;
+  padding: 1em;
 }
 
 
@@ -245,13 +296,16 @@ html {
 
 #show-page-bottom {
   width: 40%;
+
   margin: 1em auto;
 }
 
+
 #show-page-buy {
   font-family: 'Prata', serif;
-  border: 1px solid black;
+  border: 1px solid #999;
   background-color: rgb(236, 236, 236);
+  padding: 5px;
 }
 
 #buy-btn {
@@ -262,7 +316,7 @@ html {
 
 #show-page-filter {
   font-family: 'Prata', serif;
-  border: 1px solid black;
+  border: 1px solid #999;
 }
 
 #color-filter-text {
