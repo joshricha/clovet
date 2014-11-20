@@ -75,13 +75,13 @@ class ItemsController < ApplicationController
     redirect_to current_history_item.item.merchant_url
   end
 
-  def delete_from_wishlist_liked
+  def delete_from_wishlist
     user = current_user
     current_history_item = user.histories.where(:item_id => params['item_id']).first
     current_history_item.in_wishlist = false
     current_history_item.save
 
-    redirect_to user_wishlist_liked_path
+    redirect_to user_wishlist_path
   end
 
   def details
@@ -145,8 +145,8 @@ class ItemsController < ApplicationController
 
     @item = @items.sample
 
-    # CHANGE @items.sample TO NEXT ITEM!!!!!!!!!!!
-    @next_item = @items.sample
+  
+    @next_item = next_item
     
     render '/items/category/show.html.erb'
   end
