@@ -256,6 +256,12 @@ html {
 .show-page-controls {
   color: white;
 }
+#select-mens a {
+  text-decoration: none;
+}
+#select-mens a:hover {
+  color: #999;
+}
 #grey-btn {
   background-color: rgb(200,200,200);
 }
