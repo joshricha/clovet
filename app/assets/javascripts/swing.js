@@ -3952,13 +3952,15 @@ Card.config = function (config) {
     config.throwOutConfidence = config.throwOutConfidence ? config.throwOutConfidence : Card.throwOutConfidence;
 
     config.throwOutDistance = config.throwOutDistance ? config.throwOutDistance : Card.throwOutDistance;
-    config.minThrowOutDistance = config.minThrowOutDistance ? config.minThrowOutDistance : 10000;
-    config.maxThrowOutDistance = config.maxThrowOutDistance ? config.maxThrowOutDistance : 10000;
+    config.minThrowOutDistance = config.minThrowOutDistance ? config.minThrowOutDistance : 400;
+    config.maxThrowOutDistance = config.maxThrowOutDistance ? config.maxThrowOutDistance : 500;
 
     config.rotation = config.rotation ? config.rotation : Card.rotation;
     config.maxRotation = config.maxRotation ? config.maxRotation : 20;
 
     config.transform = config.transform ? config.transform : Card.transform;
+
+    // console.log(config.throwOutConfidence)
 
     return config;
 };
