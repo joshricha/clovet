@@ -480,6 +480,10 @@ h1.handwritting {
   color: #fff;
 }
 
+.navbar-inverse .navbar-brand:hover {
+  color: #999;
+}
+
 @media screen and (max-width: 320px) {
   .navbar-header {
 
@@ -490,6 +494,9 @@ h1.handwritting {
 .navbar-inverse .navbar-nav > li > a {
   color: #fff;
   font-family: 'Lato', sans-serif;
+}
+.navbar-inverse .navbar-nav > li > a:hover {
+  color: #999;
 }
 
 .col-centered{
