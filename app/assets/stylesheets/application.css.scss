@@ -78,7 +78,9 @@ html {
   display: inline-block;
   text-align: center;
 }
-
+.colors {
+  margin-left: 100px;
+}
 .color_btn {
   display: inline-block;
 }
@@ -244,6 +246,9 @@ html {
 }
 .btn_colors {
   text-align: center;
+}
+.btn-lg {
+  margin-bottom: 10px;
 }
 
 #grey-btn {
