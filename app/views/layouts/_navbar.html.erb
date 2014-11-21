@@ -31,8 +31,15 @@
         <% end %>
 
         <% if logged_in? %>
-          <li class="right"><%= link_to 'Logout', login_path, :method => :delete, :data => { :confirm => 'Log out?' } %></li>
+          <li class="right">
+            <%= link_to login_path, :method => :delete, :data => { :confirm => 'Log out?' } do %>
+      <i class="glyphicon glyphicon-user"></i> Logout
+            <% end %>
+          </li>
         <% end %>
+
+
+
 
       </ul>
     </div><!-- /.navbar-collapse -->
