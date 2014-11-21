@@ -257,6 +257,18 @@ html {
 .show-page-controls {
   color: white;
 }
+#select-mens a {
+  text-decoration: none;
+}
+#select-mens a:hover {
+  color: #999;
+}
+#select-womens a {
+  text-decoration: none;
+}
+#select-womens a:hover {
+  color: #999;
+}
 #grey-btn {
   background-color: rgb(200,200,200);
 }
@@ -437,6 +449,7 @@ html {
   background-color: black;
   color: white;
   font-family: 'Lato', sans-serif;
+  font-weight: 100;
 }
 
 #category-button:hover {
@@ -468,6 +481,10 @@ h1.handwritting {
   color: #fff;
 }
 
+.navbar-inverse .navbar-brand:hover {
+  color: #999;
+}
+
 @media screen and (max-width: 320px) {
   .navbar-header {
 
@@ -479,12 +496,47 @@ h1.handwritting {
   color: #fff;
   font-family: 'Lato', sans-serif;
 }
+.navbar-inverse .navbar-nav > li > a:hover {
+  color: #999;
+}
 
 .col-centered{
     float: none;
     margin: 0 auto;
 }
 
+@media screen and (max-width: 600px) {
+  .show-item {
+    width: 100%;
+    font-family:'Lato', sans-serif;
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .show-item {
+    width: 40em;
+    font-family:'Lato', sans-serif;
+    text-align: center;
+    margin: 20px auto;
+  }
+}
+
+.show-item img {
+  width: 100%;
+}
+
+#show-page-buy-btn {
+  margin: 0.1em auto;
+  display: block;
+  background-color: black;
+  color: white;
+}
+
+#show-page-btn {
+  margin: 0.1em auto;
+  display: block;
+}
 
 
 

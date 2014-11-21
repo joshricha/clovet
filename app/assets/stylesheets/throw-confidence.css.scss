@@ -9,10 +9,23 @@
 }
 
 .no {
-  background: #ce2929; 
-  text: "no";
+  background: #d6655a; 
 }
 
 .yes {
-  background: #71bc84; 
+  background: #b8cc6e; 
+}
+#yes {
+  position: absolute;
+  top: 170px;
+  left: 170px;
+  font-family: 'Prata', serif;
+  color: #fff;
+}
+#no {
+  position: absolute;
+  top: 170px;
+  left: 150px;
+  font-family: 'Prata', serif;
+  color: #fff;
 }
