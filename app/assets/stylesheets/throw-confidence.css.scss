@@ -10,9 +10,22 @@
 
 .no {
   background: #ce2929; 
-  text: "no";
 }
 
 .yes {
   background: #71bc84; 
+}
+#yes {
+  position: absolute;
+  top: 170px;
+  left: 170px;
+  font-family: 'Prata', serif;
+  color: #fff;
+}
+#no {
+  position: absolute;
+  top: 170px;
+  left: 150px;
+  font-family: 'Prata', serif;
+  color: #fff;
 }
