@@ -4,10 +4,10 @@
     <% if @cat1 %>
       <a href="/items/category/<%= "#{@name}" %>/<%= "#{(@cat1.downcase)}/view" %>"><button type="button" class="btn btn-default" id="category-button">View All <%= @cat1 %> <i class="fa fa-caret-right"></i></button></a>
     <% else %>
-      <a href="/items/category/<%= "#{(@name.downcase)}" %>/all"><button type="button" class="btn btn-default" id="category-button">View All <%= @name %> <i class="fa fa-caret-right"></i></button></a>
+      <a href="/items/category/<%= "#{(@name.downcase)}" %>/all"><button type="button" class="btn btn-default" id="category-button">View All <%= @name %> </button></a>
     <% end %>
 
-    <ul>
+    <ul class="menu">
       <% @children.each do |cat| %>
         <li>
           <a href="/items/category/<%= @gender_old %>/<%= cat.name %>">
@@ -17,7 +17,7 @@
           </a>
         </li>
       <% end %>
-      <a href="<%= request.referer %>"><button type="button" class="btn btn-default" id="category-button"><i class="fa fa-caret-left"></i> Back</button></a>
+      <a href="<%= request.referer %>"><button type="button" class="btn btn-default" id="category-button"> Back</button></a>
     </ul>
   </div>
 

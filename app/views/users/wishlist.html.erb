@@ -8,11 +8,11 @@
         <li class="wishlist" id="wishlist">
           <img src= <%=wishlist_item.image_url50%>>
           <p class="wishlist">
-            <%= link_to wishlist_item.name, item_details_path(wishlist_item.id) %>
+            <%= link_to wishlist_item.name.split(' - ')[0..1].join(" - "), item_details_path(wishlist_item.id) %>
 
-            <%= wishlist_item.price %>
+            $<%= wishlist_item.price %>
 
-          <i class="glyphicon glyphicon-trash"></i><%= link_to 'delete', delete_from_wishlist_path(:item_id => wishlist_item.id), class: "deleting" %>
+          <%= link_to '<i class="glyphicon glyphicon-trash"></i>'.html_safe, delete_from_wishlist_path(:item_id => wishlist_item.id), class: "deleting" %>
 
           </p>
 
@@ -32,7 +32,7 @@
 
 
 <script>
-  
+
   $(".deleting").on('click',function() {
   $(this).closest("li").fadeOut( "slow" );
 });

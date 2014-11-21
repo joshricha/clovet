@@ -17,9 +17,14 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import url(http://fonts.googleapis.com/css?family=Dancing+Script);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
 
 html {
   width: 100%;
+}
+
+a {
+  font-family: 'Open Sans', sans-serif;
 }
 .center {
   text-align: center;
@@ -515,7 +520,7 @@ h1.handwritting {
 
 @media screen and (min-width: 600px) {
   .show-item {
-    width: 40em;
+    width: 30em;
     font-family:'Lato', sans-serif;
     text-align: center;
     margin: 20px auto;
@@ -543,5 +548,7 @@ p.wishlist {
   padding: 1.3em;
 }
 
-
+ul.menu {
+    list-style-type: none;
+}
 

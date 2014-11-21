@@ -16,14 +16,6 @@
         <% end %>
     <% end %>
 
-    <% color_list.each do |color| %>
-
-      <%= form_tag "/items/category/#{params[:gender]}/#{params[:category_1]}/view", :method => 'get', :class => "color_btn" do %>
-        <%= hidden_field_tag 'color', color %>
-        <button class=<%="btn_#{color.downcase}"%>> <%=color.downcase %></button>
-        <% end %>
-
-    <% end %>
 
   </div>
 </div>
