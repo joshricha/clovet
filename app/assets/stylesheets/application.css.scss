@@ -17,9 +17,14 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import url(http://fonts.googleapis.com/css?family=Dancing+Script);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
 
 html {
   width: 100%;
+}
+
+a {
+  font-family: 'Open Sans', sans-serif;
 }
 .center {
   text-align: center;
@@ -490,7 +495,7 @@ h1.handwritting {
 
   }
 }
-
+  U
 
 .navbar-inverse .navbar-nav > li > a {
   color: #fff;
@@ -538,7 +543,10 @@ h1.handwritting {
   display: block;
 }
 
-
+p.wishlist {
+  display: inline;
+  padding: 1.3em;
+}
 
 
 
