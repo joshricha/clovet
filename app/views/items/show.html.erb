@@ -1,25 +1,25 @@
 
 
-<div id="viewport">
-  <ul class="stack" id="img-source">
-    <li class="spades">
-       <img src="<%= @item.image_url400 %>" alt="">
+  <div id="viewport">
+    <ul class="stack" id="img-source">
+      <li class="spades">
+         <img src="<%= @item.image_url400 %>" alt="">
 
-        <div class="yes"></div>
-        <div class="no"></div>
-    </li>
-  </ul>
-</div>
+          <div class="yes"></div>
+          <div class="no"></div>
+      </li>
+    </ul>
+  </div>
 
-<div id="item-details">
-  <p><%= @item.name %></p>
-  <p>$<%= @item.price %> AUD</p>
-</div>
+  <div id="item-details">
+    <p><%= @item.name %></p>
+    <p>$<%= @item.price %> AUD</p>
+  </div>
 
 
 
-<%= render 'history' %>
-<%= render '/xxx/cat/color' %>
+  <%= render 'history' %>
+  <%= render '/xxx/cat/color' %>
 
 
 

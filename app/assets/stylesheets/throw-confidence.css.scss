@@ -17,15 +17,20 @@
 }
 #yes {
   position: absolute;
-  top: 170px;
-  left: 170px;
+  top: 110px;
+  left: 100px;
   font-family: 'Prata', serif;
   color: #fff;
 }
 #no {
   position: absolute;
-  top: 170px;
-  left: 150px;
+  top: 110px;
+  left: 80px;
   font-family: 'Prata', serif;
   color: #fff;
+}
+
+
+.imgsource img {
+  width: 250px;
 }
