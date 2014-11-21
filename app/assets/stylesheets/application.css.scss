@@ -504,6 +504,38 @@ h1.handwritting {
     margin: 0 auto;
 }
 
+@media screen and (max-width: 600px) {
+  .show-item {
+    width: 100%;
+    font-family:'Lato', sans-serif;
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .show-item {
+    width: 40em;
+    font-family:'Lato', sans-serif;
+    text-align: center;
+    margin: 20px auto;
+  }
+}
+
+.show-item img {
+  width: 100%;
+}
+
+#show-page-buy-btn {
+  margin: 0.1em auto;
+  display: block;
+  background-color: black;
+  color: white;
+}
+
+#show-page-btn {
+  margin: 0.1em auto;
+  display: block;
+}
 
 
 

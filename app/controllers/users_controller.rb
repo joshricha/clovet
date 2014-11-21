@@ -24,6 +24,7 @@ class UsersController < ApplicationController
 
   def wishlist
     @user = current_user
-    @user_wishlist =  @user.histories.where(:in_wishlist => true) 
+    user_wishlist =  @user.histories.where(:in_wishlist => true)
+    @user_wishlist = user_wishlist.reverse
   end
 end
