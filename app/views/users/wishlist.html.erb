@@ -5,14 +5,14 @@
       <ul>
         <% @user_wishlist.each do |item|  %>
         <% wishlist_item = item.item %>
-        <li class="wishlist">
+        <li class="wishlist" id="wishlist">
           <img src= <%=wishlist_item.image_url50%>>
 
           <%= link_to wishlist_item.name, item_details_path(wishlist_item.id) %>
 
           <%= wishlist_item.price %>
 
-          <i class="glyphicon glyphicon-trash"></i><%= link_to 'delete', delete_from_wishlist_path(:item_id => wishlist_item.id) %>
+          <i class="glyphicon glyphicon-trash"></i><%= link_to 'delete', delete_from_wishlist_path(:item_id => wishlist_item.id), class: "deleting" %>
         </li>
         <% end %>
       </ul>
@@ -22,3 +22,11 @@
   </div>
 </div>
 
+
+<script>
+  
+  $(".deleting").on('click',function() {
+  $(this).closest("li").fadeOut( "slow" );
+});
+
+</script>
